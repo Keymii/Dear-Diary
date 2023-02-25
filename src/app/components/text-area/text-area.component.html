@@ -1,29 +1,22 @@
 <div class="container">
-  <div class="title" *ngFor="let a of allData">
-    <a routerLink="note">{{ a.title }}</a>
-  </div>
+  <div>
+    <div class="title" *ngFor="let a of allData">
+      <div class="individual-title">
+        <a routerLink="note" (click)="onNoteClicked(a.id)">{{ a.title }}</a>
 
-  <button
-    class="delete-button"
-    *ngFor="let a of allData"
-    (click)="deleteNote(a.id)"
-  >
-    delete
-  </button>
-  <form #textForm="ngForm" (ngSubmit)="saveMainContentData(textForm.value)">
-    <div class="title"><input type="text" name="title" ngModel /></div>
+        <button class="delete-button" (click)="deleteNote(a.id)">delete</button>
+      </div>
+    </div>
+  </div>
+  <form #textForm="ngForm" (ngSubmit)="editorSaveData(textForm.value)">
+    <div class="title">
+      <input id="necessary-text" type="text" name="title" ngModel />
+    </div>
     <div class="text-area">
       <textarea name="mainNoteContent" ngModel></textarea>
     </div>
     <div class="edit">
-      <input type="submit" value="submit" />
-      <button
-        class="edit-button"
-        *ngFor="let a of allData"
-        (click)="onEditClicked(a.id)"
-      >
-        edit
-      </button>
+      <input type="submit" value="{{ editMode ? 'Edit' : 'Save' }}" />
     </div>
   </form>
 </div>

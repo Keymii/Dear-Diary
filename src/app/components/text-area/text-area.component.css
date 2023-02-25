@@ -1,2 +1,42 @@
-form input { width: 1000px;
-height: 100px;}
+* {
+  padding: 0px;
+  margin: 0px;
+}
+div.container {
+  display: flex;
+  flex-direction: row;
+}
+div.title {
+  display: flex;
+  flex-direction: column;
+  min-width: 250px;
+}
+a{
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+  padding: 5px;
+}
+div.title div.individual-title {
+  display: flex;
+  flex-direction: row;
+}
+    
+
+
+
+
+
+
+
+
+form{
+    min-width: 1000px;
+}
+form input{
+    height: 50px;
+}
+form textarea{
+    min-width: 1000px;
+    height: 800px;
+}
