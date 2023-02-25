@@ -40,7 +40,16 @@ export class TextAreaComponent implements OnInit {
     });
   }
 
-
+// add button logic
+  
+  newNote(data: { title: any; mainNoteContent: any; id?: string }) {
+    this.form.setValue({
+      title:"",
+      mainNoteContent: "",
+      
+    });
+    this.editMode = false;
+  }
   
 // save button logic
 

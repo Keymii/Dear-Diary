@@ -6,7 +6,7 @@
 
         <button class="delete-button" (click)="deleteNote(a.id)">delete</button>
       </div>
-    </div>
+    </div><button class="new-note" (click)="newNote(textForm.value)">add a note</button>
   </div>
   <form #textForm="ngForm" (ngSubmit)="editorSaveData(textForm.value)">
     <div class="title">
