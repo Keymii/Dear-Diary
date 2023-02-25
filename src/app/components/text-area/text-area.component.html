@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="title" *ngFor="let a of allData">
+    <a routerLink="note">{{ a.title }}</a>
+  </div>
+
+  <button
+    class="delete-button"
+    *ngFor="let a of allData"
+    (click)="deleteNote(a.id)"
+  >
+    delete
+  </button>
+  <form #textForm="ngForm" (ngSubmit)="saveMainContentData(textForm.value)">
+    <div class="title"><input type="text" name="title" ngModel /></div>
+    <div class="text-area">
+      <textarea name="mainNoteContent" ngModel></textarea>
+    </div>
+    <div class="edit">
+      <input type="submit" value="submit" />
+      <button
+        class="edit-button"
+        *ngFor="let a of allData"
+        (click)="onEditClicked(a.id)"
+      >
+        edit
+      </button>
+    </div>
+  </form>
+</div>

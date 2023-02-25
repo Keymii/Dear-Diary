@@ -1,10 +1,13 @@
+import { AppComponent } from './app.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
-const routes: Routes = [];
+import { TextAreaComponent } from './components/text-area/text-area.component';
+const routes: Routes = [{path:'',component:AppComponent},
+  { path: 'note', component:TextAreaComponent  },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

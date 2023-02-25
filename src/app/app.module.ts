@@ -6,10 +6,12 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { TextAreaComponent } from './components/text-area/text-area.component';
+
 
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, TextAreaComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
