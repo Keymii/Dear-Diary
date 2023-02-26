@@ -18,16 +18,15 @@ export class TextAreaComponent implements OnInit {
     title: any;
     mainNoteContent: any;
   };
-
   ngOnInit() {
     this.fetchData();
+    document.getElementById('deleteNote').style.visibility = 'hidden';
   }
-  
-  constructor(public http: HttpClient) {}
-  
 
-// when one of the note is clicked in notes pannel 
-  
+  constructor(public http: HttpClient) {}
+
+  // when one of the note is clicked in notes pannel
+
   onNoteClicked(id: string) {
     this.editMode = true;
     let selectedNote = this.allData.find((p) => {
@@ -38,20 +37,21 @@ export class TextAreaComponent implements OnInit {
       title: selectedNote.title,
       mainNoteContent: selectedNote.mainNoteContent,
     });
+    document.getElementById('deleteNote').style.visibility = 'visible';
   }
 
-// add button logic
-  
+  // add button logic
+
   newNote(data: { title: any; mainNoteContent: any; id?: string }) {
     this.form.setValue({
-      title:"",
-      mainNoteContent: "",
-      
+      title: '',
+      mainNoteContent: '',
     });
     this.editMode = false;
+    document.getElementById('deleteNote').style.visibility = 'hidden';
   }
-  
-// save button logic
+
+  // save button logic
 
   editorSaveData(data: { title: any; mainNoteContent: any; id?: string }) {
     if (!this.editMode) {
@@ -61,9 +61,6 @@ export class TextAreaComponent implements OnInit {
     }
   }
 
-
-
-
   saveMainContentData(data: { title: any; mainNoteContent: any; id?: string }) {
     const headers = new HttpHeaders({ myHeader: 'Angular' });
     this.http
@@ -72,8 +69,9 @@ export class TextAreaComponent implements OnInit {
         data
       )
       .subscribe((ref) => {
-        console.log(ref);
       });
+    this.fetchData();
+    this.newNote(data);
   }
   updateData(
     id: string,
@@ -82,15 +80,15 @@ export class TextAreaComponent implements OnInit {
     this.http
       .put(
         'https://testserver-768e5-default-rtdb.firebaseio.com/data/' +
-        id +
-        '.json',
+          id +
+          '.json',
         value
       )
       .subscribe();
+    this.fetchData();
   }
 
-
-//data fetching from servers
+  //data fetching from servers
 
   private fetchData() {
     this.http
@@ -113,11 +111,8 @@ export class TextAreaComponent implements OnInit {
         this.allData = data;
       });
   }
-  onDataFetched() {
-    this.fetchData();
-  }
-  
-//delete data logic
+
+  //delete data logic
 
   deleteNote(id: string) {
     this.http
@@ -127,5 +122,16 @@ export class TextAreaComponent implements OnInit {
           '.json'
       )
       .subscribe();
+      this.fetchData();
+  }
+  deleteThisNote(currentTextId: string) {
+    this.http
+      .delete(
+        'https://testserver-768e5-default-rtdb.firebaseio.com/data/' +
+          this.currentTextId +
+          '.json'
+      )
+      .subscribe();
+      this.fetchData();
   }
 }
