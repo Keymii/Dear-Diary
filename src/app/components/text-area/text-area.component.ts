@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { config } from '../../config'
 // import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-text-area',
