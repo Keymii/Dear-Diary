@@ -34,6 +34,36 @@ div.title div.individual-title {
   display: flex;
   flex-direction: row;
 }
+
+.sidebar{
+  scroll-behavior: auto;
+  height: 400px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 10px;
+}
+
+/* width */
+.sidebar::-webkit-scrollbar {
+  width: 10px;
+  margin-left: 10px;
+}
+
+/* Track */
+.sidebar::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  margin-left: 10px;
+}
+
+/* Handle */
+.sidebar::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
 .new-note{
   margin-top: 3%;
   padding: 4px;

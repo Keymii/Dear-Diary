@@ -7,12 +7,13 @@
 <div class="container">
   <div class="side-nav">
     <div class="headnav"><h1 align="center" ><span>I</span>ndex</h1></div>
+    <div class="sidebar">
     <div class="title" *ngFor="let a of allData">
       <div class="individual-title">
         <a class="note-name" routerLink="note" (click)="onNoteClicked(a.id)">{{ a.title }}</a>
         <button style="margin-right: 10px;"class="delete-button" routerLink="note" (click)="onNoteClicked(a.id)" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
         <button class="delete-button" (click)="deleteNote(a.id)" ><i class="fa fa-trash-o"></i></button>
-      </div>
+      </div></div>
     </div>
     <div class="addnote">
     <button class="new-note" (click)="newNote(textForm.value)">ADD NOTE <i class="fa fa-plus"></i> </button></div>
