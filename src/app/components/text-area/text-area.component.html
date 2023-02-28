@@ -1,26 +1,31 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sassy+Frass&display=swap" rel="stylesheet">
+<div id="myDiv"></div>
 <div class="container">
-  <div>
+  <div class="side-nav">
+    <div class="headnav"><h1 align="center" ><span>I</span>ndex</h1></div>
     <div class="title" *ngFor="let a of allData">
       <div class="individual-title">
-        <a routerLink="note" (click)="onNoteClicked(a.id)">{{ a.title }}</a>
-
-        <button class="delete-button" (click)="deleteNote(a.id)">delete</button>
+        <a class="note-name" routerLink="note" (click)="onNoteClicked(a.id)">{{ a.title }}</a>
+        <button class="delete-button" (click)="deleteNote(a.id)" ><i class="fa fa-trash-o"></i></button>
       </div>
     </div>
-    <button class="new-note" (click)="newNote(textForm.value)">
-      add a note
-    </button>
+    <div class="addnote">
+    <button class="new-note" (click)="newNote(textForm.value)">ADD NOTE <i class="fa fa-plus"></i> </button></div>
   </div>
   <form #textForm="ngForm" (ngSubmit)="editorSaveData(textForm.value)">
     <div class="title">
-      <input id="necessary-text" type="text" name="title" ngModel />
+      <input id="necessary-text" placeholder="Note Heading"  type="text" name="title" ngModel />
     </div>
     <div class="text-area">
-      <textarea name="mainNoteContent" ngModel></textarea>
+      <textarea class="text-box1" placeholder="Share Something about today?" name="mainNoteContent" ngModel></textarea>
     </div>
     <div class="edit" >
-    <input type="submit" value="{{ editMode ? 'Edit' : 'Save' }}" />
-    <input type="button" id="deleteNote" value="delete"  (click)="deleteThisNote(currentTextId)"/>
+    <input class="sub" type="submit" value="{{ editMode ? 'Edit' : 'Save' }}" />
+    <input class="sub" type="button" id="deleteNote" value="Delete"  (click)="deleteThisNote(currentTextId)"/>
     </div>
   </form>
 </div>
