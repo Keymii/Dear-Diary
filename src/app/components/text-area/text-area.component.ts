@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { config } from '../../config'
+import { config } from '../../config';
 // import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-text-area',
@@ -63,14 +63,13 @@ export class TextAreaComponent implements OnInit {
   }
 
   saveMainContentData(data: { title: any; mainNoteContent: any; id?: string }) {
-    const headers = new HttpHeaders({ myHeader: 'Angular' });
+    // const headers = new HttpHeaders({ myHeader: 'Angular' });
     this.http
       .post<{ name: string }>(
         'https://testserver-768e5-default-rtdb.firebaseio.com/data.json',
         data
       )
-      .subscribe((ref) => {
-      });
+      .subscribe((ref) => {});
     this.fetchData();
     this.newNote(data);
   }
@@ -123,7 +122,7 @@ export class TextAreaComponent implements OnInit {
           '.json'
       )
       .subscribe();
-      this.fetchData();
+    this.fetchData();
   }
   deleteThisNote(currentTextId: string) {
     this.http
@@ -133,6 +132,6 @@ export class TextAreaComponent implements OnInit {
           '.json'
       )
       .subscribe();
-      this.fetchData();
+    this.fetchData();
   }
 }

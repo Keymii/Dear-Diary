@@ -57,8 +57,10 @@
           "defaultConfiguration": "production"
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "configurations": {
+          "builder": "@angular-devkit/build-angular:dev-server","options": {
+            "browserTarget": "latest-angular:build",
+			"port": 8442},
+          "configurations": { 
             "production": {
               "browserTarget": "angular:build:production"
             },
