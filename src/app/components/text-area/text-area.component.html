@@ -1,9 +1,3 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@300&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Sassy+Frass&display=swap" rel="stylesheet">
-
 <div class="container">
   <div class="side-nav">
     <div class="headnav"><h1 align="center" ><span>I</span>ndex</h1></div>
@@ -20,7 +14,7 @@
   </div>
   <form #textForm="ngForm" (ngSubmit)="editorSaveData(textForm.value)">
     <div class="title">
-      <input id="necessary-text" placeholder="Note Heading"  type="text" name="title" ngModel />
+      <input id="necessary-text" placeholder="Note Heading"  type="text"  name="title" required ngModel />
     </div>
     <div class="text-area">
       <textarea class="text-box1" placeholder="Share Something about today?" name="mainNoteContent" ngModel></textarea>
