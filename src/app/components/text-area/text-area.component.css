@@ -1,0 +1,233 @@
+* {
+  padding: 0px;
+  margin: 0px;
+}
+
+::-webkit-scrollbar {
+	width: 20px;
+}
+
+::-webkit-scrollbar-track {
+	background: #ae9d72;
+	background-image: url("https://www.transparenttextures.com/patterns/black-paper.png");
+}
+
+::-webkit-scrollbar-thumb {
+	background: #ae9d72;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: #8bba98;
+}
+
+div.container {
+  display: flex;
+  flex-direction: row;
+}
+div.title {
+  display: flex;
+  flex-direction: column;
+  min-width: 250px;
+}
+
+div.title div.individual-title {
+  display: flex;
+  flex-direction: row;
+}
+.new-note{
+  margin-top: 3%;
+  padding: 4px;
+  font-size: 20px;
+}
+.addnote{
+  margin-top: 3%;
+  display: flex;
+    justify-content: center;
+}
+/* .new-note{
+  justify-content: center;
+} */
+
+.individual-title{
+  padding-top: 3%;
+}
+
+.sub{
+  font-size: 24px;
+  width: 20%;
+}
+
+#deleteNote{
+  margin-left: 10px;
+}
+span{
+  font-family: 'Sassy Frass', cursive;
+  font-size: 100px;
+}
+.side-nav {
+  margin-left: 2%;
+  padding-left: 3%;
+  background-color: grey;
+  padding-right: 3%;
+  margin-right: 5%;
+  padding-top: 3%;
+  border-radius: 7px;
+  margin-top: 1%;
+  }
+
+  /* #myDiv {
+  width: 500px;
+  height: 500px;
+  background-repeat: no-repeat;
+  background-position: center;
+} */
+  
+  
+
+.delete-button{
+  font-size:24px;
+  padding:2%;
+}
+.text-area{
+  filter: drop-shadow(5px 5px 25px black);
+}
+
+.text-box1{
+    height: 400px !important;
+    line-height: 2.8em;
+    /* background: linear-gradient(to right, white 5px, transparent 5px), linear-gradient( white 0, white 96%, grey 96%, grey 100%); */
+    background-size: 8px 100%, 100% 2.8em;
+    background-repeat: repeat-x, repeat-y;
+    background-position: 0 0, 0 -7px;
+    /* border:solid  rgb(99, 19, 19) 14px;
+    color: rgb(99, 19, 19); */
+    min-width: 87%;
+    text-shadow: 0.2px 0.2px 1.3px sienna;
+    font-size: 16pt;
+    font-weight: 400;
+    line-height: 28pt;
+    color: #565046;
+    letter-spacing: 0.5px;
+    word-spacing: 3px;
+    height: 600px;
+    margin-bottom: 40px;
+    padding-left: 20px;
+    /* border-radius: 3px; */
+    position: relative;
+    font-family: "Josefin Slab", serif;
+	top: 10px;
+	background: url("https://i.imgur.com/0kjMcUe.png");
+	background-size: 1000px;
+	background-position: center right;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	width: 50%;
+	height: auto;
+	padding: 30px 80px 50px 80px;
+	z-index: 1;
+	filter: brightness(0.95) sepia(30%) saturate(80%);
+	border-radius: 30px;
+	height: 90vh;
+	clip-path: polygon(
+		0% 0%,
+		0% 93%,
+		5% 98%,
+		6% 99%,
+		8% 95%,
+		12% 94%,
+		15% 97%,
+		17% 93%,
+		20% 98%,
+		22% 97%,
+		25% 99%,
+		31% 94%,
+		35% 93%,
+		39% 96%,
+		43% 93%,
+		45% 94%,
+		47% 95%,
+		50% 92%,
+		52% 96%,
+		54% 93%,
+		58% 92%,
+		60% 95%,
+		62% 93%,
+		65% 96%,
+		69% 93%,
+		72% 93%,
+		75% 94%,
+		79% 97%,
+		81% 94%,
+		85% 93%,
+		88% 92%,
+		90% 95%,
+		93% 93%,
+		95% 92%,
+		97% 95%,
+		100% 97%,
+		100% 0%
+	);
+	overflow: auto;   
+}
+
+/* .text-box1:hover{
+  background: linear-gradient(to right, white 5px, transparent 5px), linear-gradient( white 0, white 96%, #C74F32 96%, #C74F32 100%);
+  background: linear-gradient(to right, white 5px, transparent 5px), linear-gradient( white 0, white 96%, var(--color-furniture) 96%, var(--color-furniture) 100%);
+
+} */
+
+.text-area{
+  margin-top: 10px;
+  
+}
+
+.headnav{
+  color:white;
+  margin-bottom: 20px;
+}
+
+.note-name{     
+  /* The title names of note */
+  font-size: 24px;
+  color: #f1f1f1;;
+  width: 80%;
+  text-decoration:none;
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+  padding: 5px;
+}
+.note-name:hover{
+  color: #fff;
+}
+
+form{
+    min-width: 1000px;
+}
+form input{
+    height: 50px;
+
+}
+
+form input#necessary-text{
+  height: 80px;
+  font-family: "Josefin Slab", serif;
+  padding-left: 75px !important;
+  width: 95%;
+  padding-left: 20px;  
+  opacity: 0.7;
+    margin-top: 20px;
+    margin-bottom: -60px;
+    border-radius: 13px;
+    margin-bottom: 1px;
+    /* padding: 40px; */
+    font-size: 30pt;
+    font-weight: 300;
+    color: #35312b;
+    text-shadow: 0.3px 0.3px 2px sienna;
+    background: url("https://i.imgur.com/0kjMcUe.png");
+    filter: brightness(0.95) sepia(30%) saturate(80%);
+    filter: drop-shadow(5px 5px 25px black);
+}
