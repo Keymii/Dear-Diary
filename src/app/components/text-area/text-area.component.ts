@@ -70,8 +70,8 @@ export class TextAreaComponent implements OnInit {
         data
       )
       .subscribe((ref) => {});
-    this.fetchData();
-    this.newNote(data);
+      this.newNote(data);
+      setTimeout(this.fetchData, 2);
   }
   updateData(
     id: string,
@@ -85,7 +85,7 @@ export class TextAreaComponent implements OnInit {
         value
       )
       .subscribe();
-    this.fetchData();
+      setTimeout(this.fetchData,2)
   }
 
   //data fetching from servers
@@ -122,7 +122,7 @@ export class TextAreaComponent implements OnInit {
           '.json'
       )
       .subscribe();
-    this.fetchData();
+    setTimeout(this.fetchData,2)
   }
   deleteThisNote(currentTextId: string) {
     this.http
@@ -132,6 +132,6 @@ export class TextAreaComponent implements OnInit {
           '.json'
       )
       .subscribe();
-    this.fetchData();
+    setTimeout(this.fetchData, 2)
   }
 }
