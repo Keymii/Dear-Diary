@@ -1,7 +1,7 @@
 body {
 
     font-family: "Open Sans", sans-serif;
-    margin: 0;
+    margin: 0 !important;
     height: 100vh;
     display: grid;
     place-items: center;
@@ -133,10 +133,10 @@ body {
     height: inherit;
     font-size: 40px;
     color: black;
-    opacity: 0;
-    transition: 0.3s;
     font-family: "Josefin Slab", serif;
     text-shadow: 0.2px 0.2px 1.3px sienna;
+    opacity: 0;
+    transition: 0.3s;
   }
   
   .c-form {
@@ -294,5 +294,6 @@ body {
     /* background-color: #0069ec; */
     background: url("https://i.imgur.com/0kjMcUe.png");
     transition: 0.3s;
+    opacity: 0.8;
     filter: brightness(0.95) sepia(30%) saturate(80%);
   }

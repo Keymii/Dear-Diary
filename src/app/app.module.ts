@@ -6,6 +6,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TextAreaComponent } from './components/text-area/text-area.component';
+import { LoginPageComponent } from './components/login-page/login-page.component';
+import { RegisterUserComponent } from './components/register-user/register-user.component';
 
 
 
