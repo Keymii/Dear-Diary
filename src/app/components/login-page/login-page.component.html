@@ -14,12 +14,13 @@
     <div class="c-form__progress"></div>
     
     <div class="c-formContainer">
-      <div class="c-welcome">Hello <-name->!</div>
-      <form class="c-form"   #loginForm="ngForm" (ngSubmit)="fetchLoginData()">
+      <div class="c-welcome">Hello &lt;-name->!</div>
+      <form class="c-form"   #loginForm="ngForm" (ngSubmit)="postLoginData(loginForm.value)">
         <div class="c-form__group">
           <label class="c-form__label" for="username">
                         <input
-                            type="text"
+                            type="text" 
+                            name="username"
                             id="username"
                             class="c-form__input"
                             placeholder=" "
@@ -57,6 +58,7 @@
           <label class="c-form__label" for="fpass">
             <input
             type="password"
+            name="fpass"
             id="fpass"
             class="c-form__input"
             placeholder=" "
@@ -71,9 +73,14 @@
           
         </div>
     
+<<<<<<< HEAD
         <label class="c-form__toggle" for="start" (click)="toggleData()" >Login<span class="c-form__toggleIcon"    id="c-form__toggleIcon"></span></label>
         
       </form>    <div  class="loginlink" id="linke"  *ngIf="toDisplay"><a routerLink="/register" class="linke">don't have a account yet? Create One</a></div>
+=======
+        <label class="c-form__toggle" for="start">Login<span class="c-form__toggleIcon"></span></label>
+      </form>
+>>>>>>> 73649603fbb70708d13e8db0d839eb75ffda386c
     </div>
     </div>
 
