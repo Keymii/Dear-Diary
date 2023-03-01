@@ -2,8 +2,12 @@ import { AppComponent } from './app.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TextAreaComponent } from './components/text-area/text-area.component';
-const routes: Routes = [{path:'',component:AppComponent},
+import { LoginPageComponent } from './components/login-page/login-page.component';
+import { RegisterUserComponent } from './components/register-user/register-user.component';
+const routes: Routes = [
   { path: 'note', component:TextAreaComponent  },
+  { path: 'login', component: LoginPageComponent },
+  { path: 'register', component: RegisterUserComponent },
 ];
 
 @NgModule({
