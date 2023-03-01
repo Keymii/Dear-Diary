@@ -135,3 +135,5 @@ export class TextAreaComponent implements OnInit {
     setTimeout(this.fetchData, 2)
   }
 }
+
+
