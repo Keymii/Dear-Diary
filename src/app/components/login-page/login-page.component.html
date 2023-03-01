@@ -71,10 +71,9 @@
           
         </div>
     
-        <label class="c-form__toggle" for="start">Login<span class="c-form__toggleIcon"></span></label>
+        <label class="c-form__toggle" for="start" (click)="toggleData()" >Login<span class="c-form__toggleIcon"    id="c-form__toggleIcon"></span></label>
         
-      </form>
+      </form>    <div  class="loginlink" id="linke"  *ngIf="toDisplay"><a routerLink="/register" class="linke">don't have a account yet? Create One</a></div>
     </div>
     </div>
 
-    <div class="loginlink"><a routerLink="/register" >don't have a account yet? Create One</a></div>

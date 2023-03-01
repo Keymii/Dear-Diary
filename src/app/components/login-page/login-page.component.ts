@@ -3,12 +3,22 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { config } from '../../config';
 
+const trigger = document.getElementById("c-form__toggleIcon");
+const elementToHide = document.getElementById("linke");
+
+trigger.addEventListener("click", () => {
+  elementToHide.style.visibility = "hidden";
+}); 
+
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.css']
 })
+
+
 export class LoginPageComponent {
+
   loginData: {userinput : any, passwordInput:any,id?: string }
   constructor(public http: HttpClient) { } 
   postLoginData(loginData: {userinput : any, passwordInput:any,id?: string }) {
@@ -51,4 +61,13 @@ export class LoginPageComponent {
           console.log(data)
     });
     }
+
+  toDisplay = true;
+  
+  toggleData() {
+    this.toDisplay = !this.toDisplay;
+  }
+    
 }
+
+
