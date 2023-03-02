@@ -136,7 +136,7 @@ allData: { title: any; mainNoteContent: any; id?: string }[] = [];
     //  setTimeout(this.fetchData(), 2)
   } 
   logout() {
-    // localStorage.removeItem()
+    //  localStorage.removeItem()
     this.router.navigate(['/login'])
     
   }

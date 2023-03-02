@@ -14,9 +14,9 @@ import { Router } from '@angular/router';
 
 
 export class LoginPageComponent {
-  loginData: {username : any, fpass:any,id?: string }
+  loginData: {userid : any, pswd:any,session_key?: string }
   constructor(public http: HttpClient,public router : Router) {} 
-  postLoginData(loginData: {username : any, fpass:any,id?: string }) {
+  postLoginData(loginData: {userid : any, pswd:any,session_key?: string }) {
     const httpOptions = {
       headers: new HttpHeaders({ 
         'Access-Control-Allow-Origin':'*',
@@ -37,7 +37,7 @@ export class LoginPageComponent {
     public fetchLoginData() {
       this.http
         .get<{
-          [key: string]: { username : any, fpass:any,id?: string  };
+          [key: string]: { userid : any, pswd:any,session_key?: string  };
         }>(config.url+'login/?format=json')
         .pipe(
           map((ref) => {
@@ -51,13 +51,11 @@ export class LoginPageComponent {
           })
         )
         .subscribe((data) => {
-          // if () {}
-          // else{}
-          console.log(data)
+                  console.log(data)
     });
     }
     a: Promise<any> = fetch(
-      config.url + 'login/?format=json'
+      config.url + 'login/'
     )
       .then(
         (resolve) => resolve.json()

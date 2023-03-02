@@ -1,4 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
+import { style } from '@angular/animations';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { map } from 'rxjs/operators';
@@ -11,9 +12,11 @@ import { CustomHttpClientService } from '../../httpClient.service';
   styleUrls: ['./register-user.component.css'],
 })
 export class RegisterUserComponent {
-
-  // loginData: {name:string,userid:string, pswd:string,id?:string}
+  OnInit(){document.getElementById('disappear').style.visibility="visible"}
+  
+  loginData: {name:string,userid:string, pswd:string,id?:string}
   constructor(private http: CustomHttpClientService) {}
+ 
 
   newLoginData(loginData: { name: string; userid: string; pswd: string,id?:string }) {
     // const headers = new HttpHeaders({ myHeader: 'loginData' });
@@ -21,5 +24,8 @@ export class RegisterUserComponent {
       .post(config.url + 'register/?format=json', loginData)
       .subscribe((ref) => {});
     console.log(loginData.pswd);
+  }
+  disappear() {
+    document.getElementById('').style.visibility="hidden"
   }
 }
