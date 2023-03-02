@@ -258,6 +258,14 @@ body {
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    background: white;
+    border: 0;
+    
+  }
+
+  .c-form__next#ab{
+    margin-left: 222px;
+    left: 96px;
   }
   
   .c-form__nextIcon {
@@ -314,6 +322,7 @@ body {
     padding-top: 10px;
     font-size: 18px;
     text-decoration: none;
+    opacity: 0.8;
     
   }
   
