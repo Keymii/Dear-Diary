@@ -11,6 +11,7 @@ import { RegisterUserComponent } from './components/register-user/register-user.
 
 
 
+
 @NgModule({
   declarations: [AppComponent, TextAreaComponent, LoginPageComponent, RegisterUserComponent],
   imports: [

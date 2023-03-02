@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
@@ -12,8 +13,8 @@ export class TextAreaComponent implements OnInit {
   //type defined
   currentTextId: string;
   editMode: boolean = false;
-  allData: { title: any; mainNoteContent: any; id?: string }[] = [];
-
+allData: { title: any; mainNoteContent: any; id?: string }[] = [];
+  
   @ViewChild('textForm') form: {
     setValue(arg0: { title: any; mainNoteContent: any }): unknown;
     title: any;
@@ -24,7 +25,7 @@ export class TextAreaComponent implements OnInit {
     document.getElementById('deleteNote').style.visibility = 'hidden';
   }
 
-  constructor(public http: HttpClient) {}
+  constructor(public http: HttpClient,public router:Router) { }
 
   // when one of the note is clicked in notes pannel
 
@@ -122,7 +123,7 @@ export class TextAreaComponent implements OnInit {
           '.json'
       )
       .subscribe();
-    // setTimeout(this.fetchData,2)
+    setTimeout(this.fetchData,2)
   }
   deleteThisNote(currentTextId: string) {
     this.http
@@ -132,7 +133,12 @@ export class TextAreaComponent implements OnInit {
           '.json'
       )
       .subscribe();
-    // setTimeout(this.fetchData, 2)
+    //  setTimeout(this.fetchData(), 2)
+  } 
+  logout() {
+    // localStorage.removeItem()
+    this.router.navigate(['/login'])
+    
   }
 }
 

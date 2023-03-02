@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { config } from '../../config';
+import { Router } from '@angular/router';
 
 
 
@@ -14,7 +15,7 @@ import { config } from '../../config';
 
 export class LoginPageComponent {
   loginData: {username : any, fpass:any,id?: string }
-  constructor(public http: HttpClient) { } 
+  constructor(public http: HttpClient,public router : Router) {} 
   postLoginData(loginData: {username : any, fpass:any,id?: string }) {
     const httpOptions = {
       headers: new HttpHeaders({ 
@@ -55,7 +56,21 @@ export class LoginPageComponent {
           console.log(data)
     });
     }
-
+    a: Promise<any> = fetch(
+      config.url + 'login/?format=json'
+    )
+      .then(
+        (resolve) => resolve.json()
+        //returns a promise
+      )
+      .then((resolve) => {
+        console.log(resolve);
+        if (resolve === true) {
+        this.router.navigate(["/section"])
+        }
+        else{}
+        
+      })
  
     
 }
