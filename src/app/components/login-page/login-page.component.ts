@@ -13,34 +13,34 @@ import { v4 as uuidv4 } from 'uuid';
 export class LoginPageComponent {
     loginData: { userid: string; pswd: string; session_key?: string } = {
     userid: '',
-    pswd: '',
+      pswd: '',
+    session_key:''
   };
 
   constructor(public http: HttpClient, public router: Router) {}
 
    specialKey = uuidv4();
    requestData = {
-    session_key: uuidv4(),
+    session_key: this.specialKey,
     userid: this.loginData.userid,
     pswd: this.loginData.pswd,
   };
   postLoginData(requestData) {
 console.log(requestData)
     this.http.post<{ success: boolean }>(config.url + 'login/', requestData).subscribe((response) => {
-      if (response.success) {
-        this.router.navigate(['/note']);
-      } else {
-        console.log('Login failed:', response);
-      }
+      // if (response.success) {
+      //   this.router.navigate(['/note']);
+      // } else {
+      //   console.log('Login failed:', response);
+      // }
     });
-     fetch(config.url + 'login/', {})
+     fetch(config.url + 'login/')
     .then((response) => response.json())
     .then((resolve) => {
       console.log(resolve);
       if (resolve === 'true') {
         this.router.navigate(['/note']);
         stringuserid = this.loginData.userid;
-        console.log(stringuserid);
       }
     })
     .catch((error) => {
