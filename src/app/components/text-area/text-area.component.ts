@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { config } from '../../config';
-
+import { stringuserid } from '../login-page/login-page.component'
 // import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-text-area',
@@ -14,11 +14,11 @@ export class TextAreaComponent implements OnInit {
   //type defined
   currentTextId: string;
   editMode: boolean = false;
-allData: { title: any; mainNoteContent: any }[] = [];
-  
+  allData: { title: any; mainNoteContent: any }[] = [];
+
   @ViewChild('textForm') form: {
     setValue(arg0: { title: any; mainNoteContent: any }): unknown;
-    title: any;
+    title?: any;
     mainNoteContent: any;
   };
   ngOnInit() {
@@ -26,7 +26,7 @@ allData: { title: any; mainNoteContent: any }[] = [];
     document.getElementById('deleteNote').style.visibility = 'hidden';
   }
 
-  constructor(public http: HttpClient,public router:Router) { }
+  constructor(public http: HttpClient, public router: Router) {}
 
   // when one of the note is clicked in notes pannel
 
@@ -68,26 +68,32 @@ allData: { title: any; mainNoteContent: any }[] = [];
     // const headers = new HttpHeaders({ myHeader: 'Angular' });
     this.http
       .post<{ name: string }>(
-      'https://testserver-768e5-default-rtdb.firebaseio.com/data.json',
+        config +
+          'home/' +
+          stringuserid +
+          '/' +
+          this.currentTextId +
+          '/createpagedata/',
         data
       )
       .subscribe((ref) => {});
-      this.newNote(data);
-      // setTimeout(this.fetchData, 2);
+    this.newNote(data);
+    // setTimeout(this.fetchData, 2);
   }
-  updateData(
-    id: string,
-    value: { title: any; mainNoteContent: any  }
-  ) {
+  updateData(title: string, value: { title: any; mainNoteContent: any }) {
     this.http
       .put(
-        config.url+'home/user1/Page 1/updatepagedata/'+
-        
-          '.json',
+        config +
+        'home/' +
+         stringuserid +
+          '/' +
+          this.currentTextId +
+          '/updatepage/',
+
         value
       )
       .subscribe();
-      // setTimeout(this.fetchData,2)
+    // setTimeout(this.fetchData,2)
   }
 
   //data fetching from servers
@@ -95,8 +101,8 @@ allData: { title: any; mainNoteContent: any }[] = [];
   private fetchData() {
     this.http
       .get<{
-        [key: string]: { title: any; mainNoteContent: any; id?: string };
-      }>(   config.url+'home/user1/Page 1/')
+        [key: string]: { title: any; mainNoteContent: any };
+      }>(config.url + 'home/'+stringuserid+'/'+this.currentTextId)
       .pipe(
         map((ref) => {
           const data = [];
@@ -118,28 +124,23 @@ allData: { title: any; mainNoteContent: any }[] = [];
 
   deleteNote(title: string) {
     this.http
-      .delete(
-        'https://testserver-768e5-default-rtdb.firebaseio.com/data/' +
-          title +
-          '.json'
+      .delete(config.url+
+        'deletepage/' 
       )
       .subscribe();
-    setTimeout(this.fetchData,2)
+    setTimeout(this.fetchData, 2);
   }
   deleteThisNote(currentTextId: string) {
     this.http
       .delete(
-        'https://testserver-768e5-default-rtdb.firebaseio.com/data/' +
-          this.currentTextId +
-          '.json'
+        config.url+
+        'deletepage/'
       )
       .subscribe();
     //  setTimeout(this.fetchData(), 2)
-  } 
+  }
   logout() {
     // localStorage.removeItem()
-    this.router.navigate(['/login'])
-    
+    this.router.navigate(['/login']);
   }
 }
-

@@ -15,7 +15,7 @@
     
     <div class="c-formContainer">
       <div class="c-welcome">Hello</div>
-      <form class="c-form"   #loginForm="ngForm" (ngSubmit)="postLoginData()">
+      <form class="c-form"   #loginForm="ngForm" (ngSubmit)="postLoginData(loginForm.value)">
         <div class="c-form__group">
           <label class="c-form__label" for="username">
                         <input
@@ -74,9 +74,8 @@
           <span class="c-form__groupLabel">Enter your password.</span>
           <b class="c-form__border"></b>
           </label>
-          
         </div>
-    
+        
         <label class="c-form__toggle" for="start"  >Login<span class="c-form__toggleIcon"    id="c-form__toggleIcon"></span></label>
         
       </form>    <div  class="loginlink" id="linke" ><a routerLink="/register" class="linke">don't have a account yet? Create One</a></div>
