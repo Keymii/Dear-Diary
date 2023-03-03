@@ -4,9 +4,9 @@
     <div class="sidebar">
     <div class="title" *ngFor="let a of allData">
       <div class="individual-title">
-        <a class="note-name" routerLink="note" (click)="onNoteClicked(a.id)">{{ a.title }}</a>
-        <button style="margin-right: 10px;"class="delete-button" routerLink="note" (click)="onNoteClicked(a.id)" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-        <button class="delete-button" (click)="deleteNote(a.id)" ><i class="fa fa-trash-o"></i></button>
+        <a class="note-name" routerLink="note" (click)="onNoteClicked(a.title)">{{ a.title }}</a>
+        <button style="margin-right: 10px;"class="delete-button" routerLink="note" (click)="onNoteClicked(a.title)" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+        <button class="delete-button" (click)="deleteNote(a.title)" ><i class="fa fa-trash-o"></i></button>
       </div></div>
     </div>
     <div class="addnote">

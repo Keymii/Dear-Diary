@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { map } from 'rxjs/operators';
 import { config } from '../../config';
 import { CustomHttpClientService } from '../../httpClient.service';
-
+import { v4 as uuidv4 } from 'uuid';
 @Component({
   selector: 'app-register-user',
   templateUrl: './register-user.component.html',
@@ -14,16 +14,20 @@ import { CustomHttpClientService } from '../../httpClient.service';
 export class RegisterUserComponent {
   OnInit(){document.getElementById('disappear').style.visibility="visible"}
   
-  loginData: {name:string,userid:string, pswd:string,id?:string}
+  loginData: {name:string,userid:string, pswd:string,session_key:string}
   constructor(private http: CustomHttpClientService) {}
  
 
-  newLoginData(loginData: { name: string; userid: string; pswd: string,id?:string }) {
+  newLoginData(loginData: { name: string; userid: string; pswd: string,session_key:string }) {
     // const headers = new HttpHeaders({ myHeader: 'loginData' });
+    const specialKey = uuidv4();
+    const requestData = {
+      session_key: specialKey
+    };
     this.http
       .post(config.url + 'register/?format=json', loginData)
       .subscribe((ref) => {});
-    console.log(loginData.pswd);
+    console.log(loginData);
   }
   disappear() {
     document.getElementById('').style.visibility="hidden"

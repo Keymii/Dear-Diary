@@ -14,8 +14,8 @@
     <div class="c-form__progress"></div>
     
     <div class="c-formContainer">
-      <div class="c-welcome">Hello {{loginData.userid}}</div>
-      <form class="c-form"   #loginForm="ngForm" (ngSubmit)="postLoginData(loginForm.value)">
+      <div class="c-welcome">Hello</div>
+      <form class="c-form"   #loginForm="ngForm" (ngSubmit)="postLoginData()">
         <div class="c-form__group">
           <label class="c-form__label" for="username">
                         <input
@@ -66,6 +66,10 @@
             <button type="submit" class="c-form__next" for="finish" role="button"id="ab">
               <span class="c-form__nextIcon"></span>
             </button>
+            <!-- <input
+            type="text"
+            name="session_key"
+                      required ngModel> -->
     
           <span class="c-form__groupLabel">Enter your password.</span>
           <b class="c-form__border"></b>

@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { config } from '../../config';
+
 // import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-text-area',
@@ -13,7 +14,7 @@ export class TextAreaComponent implements OnInit {
   //type defined
   currentTextId: string;
   editMode: boolean = false;
-allData: { title: any; mainNoteContent: any; id?: string }[] = [];
+allData: { title: any; mainNoteContent: any }[] = [];
   
   @ViewChild('textForm') form: {
     setValue(arg0: { title: any; mainNoteContent: any }): unknown;
@@ -29,12 +30,12 @@ allData: { title: any; mainNoteContent: any; id?: string }[] = [];
 
   // when one of the note is clicked in notes pannel
 
-  onNoteClicked(id: string) {
+  onNoteClicked(title: string) {
     this.editMode = true;
     let selectedNote = this.allData.find((p) => {
-      return p.id === id;
+      return p.title === title;
     });
-    this.currentTextId = id;
+    this.currentTextId = title;
     this.form.setValue({
       title: selectedNote.title,
       mainNoteContent: selectedNote.mainNoteContent,
@@ -44,7 +45,7 @@ allData: { title: any; mainNoteContent: any; id?: string }[] = [];
 
   // add button logic
 
-  newNote(data: { title: any; mainNoteContent: any; id?: string }) {
+  newNote(data: { title: any; mainNoteContent: any }) {
     this.form.setValue({
       title: '',
       mainNoteContent: '',
@@ -55,7 +56,7 @@ allData: { title: any; mainNoteContent: any; id?: string }[] = [];
 
   // save button logic
 
-  editorSaveData(data: { title: any; mainNoteContent: any; id?: string }) {
+  editorSaveData(data: { title: any; mainNoteContent: any }) {
     if (!this.editMode) {
       this.saveMainContentData(data);
     } else {
@@ -63,11 +64,11 @@ allData: { title: any; mainNoteContent: any; id?: string }[] = [];
     }
   }
 
-  saveMainContentData(data: { title: any; mainNoteContent: any; id?: string }) {
+  saveMainContentData(data: { title: any; mainNoteContent: any }) {
     // const headers = new HttpHeaders({ myHeader: 'Angular' });
     this.http
       .post<{ name: string }>(
-        'https://testserver-768e5-default-rtdb.firebaseio.com/data.json',
+      'https://testserver-768e5-default-rtdb.firebaseio.com/data.json',
         data
       )
       .subscribe((ref) => {});
@@ -76,12 +77,12 @@ allData: { title: any; mainNoteContent: any; id?: string }[] = [];
   }
   updateData(
     id: string,
-    value: { title: any; mainNoteContent: any; id?: string }
+    value: { title: any; mainNoteContent: any  }
   ) {
     this.http
       .put(
-        'https://testserver-768e5-default-rtdb.firebaseio.com/data/' +
-          id +
+        config.url+'home/user1/Page 1/updatepagedata/'+
+        
           '.json',
         value
       )
@@ -95,13 +96,13 @@ allData: { title: any; mainNoteContent: any; id?: string }[] = [];
     this.http
       .get<{
         [key: string]: { title: any; mainNoteContent: any; id?: string };
-      }>('https://testserver-768e5-default-rtdb.firebaseio.com/data.json')
+      }>(   config.url+'home/user1/Page 1/')
       .pipe(
         map((ref) => {
           const data = [];
           for (const key in ref) {
             if (ref.hasOwnProperty(key)) {
-              data.push({ ...ref[key], id: key });
+              data.push({ ...ref[key], title: key });
             }
           }
           return data;
@@ -115,11 +116,11 @@ allData: { title: any; mainNoteContent: any; id?: string }[] = [];
 
   //delete data logic
 
-  deleteNote(id: string) {
+  deleteNote(title: string) {
     this.http
       .delete(
         'https://testserver-768e5-default-rtdb.firebaseio.com/data/' +
-          id +
+          title +
           '.json'
       )
       .subscribe();
@@ -136,7 +137,7 @@ allData: { title: any; mainNoteContent: any; id?: string }[] = [];
     //  setTimeout(this.fetchData(), 2)
   } 
   logout() {
-    //  localStorage.removeItem()
+    // localStorage.removeItem()
     this.router.navigate(['/login'])
     
   }
