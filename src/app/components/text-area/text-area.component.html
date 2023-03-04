@@ -8,23 +8,23 @@
       <h1 align="center"><span>I</span>ndex</h1>
     </div>
     <div class="sidebar">
-      <div class="title" *ngFor="let a of allData">
-        <div class="individual-title">
+      <div class="Page" *ngFor="let a of allData">
+        <div class="individual-Page">
           <a
             class="note-name"
             routerLink="note"
-            (click)="onNoteClicked(a.title)"
-            >{{ a.title }}</a
+            (click)="onNoteClicked(a.Page)"
+            >{{ a.Page }}</a
           >
           <button
             style="margin-right: 10px"
             class="delete-button"
             routerLink="note"
-            (click)="onNoteClicked(a.title)"
+            (click)="onNoteClicked(a.Page)"
           >
             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
           </button>
-          <button class="delete-button" (click)="deleteNote(a.title)">
+          <button class="delete-button" (click)="deleteNote(a.Page)">
             <i class="fa fa-trash-o"></i>
           </button>
         </div>
@@ -37,12 +37,12 @@
     </div>
   </div>
   <form #textForm="ngForm" (ngSubmit)="editorSaveData(textForm.value)">
-    <div class="title">
+    <div class="Page">
       <input
         id="necessary-text"
         placeholder="Note Heading"
         type="text"
-        name="title"
+        name="Page"
         required
         ngModel
       />

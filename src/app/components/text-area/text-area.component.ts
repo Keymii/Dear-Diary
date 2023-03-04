@@ -1,10 +1,10 @@
 import { QueryParamsHandling, Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+// import { map } from 'rxjs/operators';
+import { userData } from '../login-page/login-page.component';
 import { config } from '../../config';
-import { stringuserid } from '../login-page/login-page.component'
-import{ userData } from '../login-page/login-page.component'
+// import{userData} from '../login-page/login-page.component'
 @Component({
   selector: 'app-text-area',
   templateUrl: './text-area.component.html',
@@ -14,23 +14,25 @@ export class TextAreaComponent implements OnInit {
   //type defined
   currentTextId: string;
   editMode: boolean = false;
-  allData: { title: any; mainNoteContent: any }[] = [];
-
+  allData: { Page: any; Data: any }[] = [];
+  currentTitle: string;
   @ViewChild('textForm') form: {
-    setValue(arg0: { title: any; mainNoteContent: any }): unknown;
-    title?: any;
-    mainNoteContent: any;
+    setValue(arg0: { Page: any; Data: any }): unknown;
+    Page?: any;
+    Data: any;
   };
-
+  stringuserid:string = localStorage.getItem('userid')
+  session_key:string =   localStorage.getItem('sessionkey')
   ngOnInit() { 
     document.getElementById('deleteNote').style.visibility = 'hidden';
     document.getElementById("error").style.visibility = "hidden"
-    this.userloginornot()
-    console.log(localStorage.getItem('sessionkey'))
+    // this.userloginornot()
+ this.fetchData()
+
   }
   userloginornot() {
     if (
-      localStorage.getItem('sessionkey') === userData.session_key) { this.fetchData(); }
+      this.stringuserid === userData.session_key) { this.fetchData(); }
     else {
       document.getElementById("error").style.visibility="visible"
     }
@@ -40,25 +42,25 @@ export class TextAreaComponent implements OnInit {
 
   // when one of the note is clicked in notes pannel
 
-  onNoteClicked(title: string) {
+  onNoteClicked(Page: string) {
     this.editMode = true;
     let selectedNote = this.allData.find((p) => {
-      return p.title === title;
+      return p.Page === Page;
     });
-    this.currentTextId = title;
+    this.currentTextId = Page;
     this.form.setValue({
-      title: selectedNote.title,
-      mainNoteContent: selectedNote.mainNoteContent,
+      Page: selectedNote.Page,
+      Data: selectedNote.Data,
     });
     document.getElementById('deleteNote').style.visibility = 'visible';
   }
 
   // add button logic
 
-  newNote(data: { title: any; mainNoteContent: any }) {
+  newNote(data: { Page: any; Data: any }) {
     this.form.setValue({
-      title: '',
-      mainNoteContent: '',
+      Page: '',
+      Data: '',
     });
     this.editMode = false;
     document.getElementById('deleteNote').style.visibility = 'hidden';
@@ -66,7 +68,8 @@ export class TextAreaComponent implements OnInit {
 
   // save button logic
 
-  editorSaveData(data: { title: any; mainNoteContent: any }) {
+  editorSaveData(data: { Page: any; Data: any }) {
+    this.currentTitle=data.Page
     if (!this.editMode) {
       this.saveMainContentData(data);
     } else {
@@ -74,23 +77,27 @@ export class TextAreaComponent implements OnInit {
     }
   }
 
-  saveMainContentData(data: { title: any; mainNoteContent: any }) {
-    // const headers = new HttpHeaders({ myHeader: 'Angular' });
-    this.http
-      .post<{ name: string }>(
-        config +
-          'home/' +
-          stringuserid +
-          '/' +
-          this.currentTextId +
-          '/createpagedata/',
-        data
-      )
-      .subscribe((ref) => {});
-    this.newNote(data);
-    // setTimeout(this.fetchData, 2);
+  saveMainContentData(data: { Page: any; Data: any }) {
+    //     let requestOptions:RequestInit = {
+    //     method: 'POST',
+    //     redirect: 'follow',
+    //     body: JSON.stringify(data)
+    // };      
+    this.http.post<{ data: { Page: any; Data: any }, }>(config.url + 'home/'+this.stringuserid+'/'+this.currentTitle).subscribe((ref) => {
+      console.log(ref);
+    });
+      // fetch( config +
+      //   'home/' +this.stringuserid
+      //   +'/'+
+      //   this.currentTitle +
+      //   '/createpagedata/', requestOptions)
+      //   .then(response => response.text())
+      //   .then(result => console.log(result))
+      //   .catch(error => console.log('error', error));
+      //   // this.newNote(data);
+  
   }
-  updateData(title: string, value: { title: any; mainNoteContent: any }) {
+  updateData(Page: string, value: { Page: any; Data: any }) {
     let requestOptions:RequestInit = {
       method: 'POST',
       redirect: 'follow'
@@ -106,31 +113,46 @@ export class TextAreaComponent implements OnInit {
   //data fetching from servers
 
   private fetchData() {
-    this.http
-      .get<{
-        [key: string]: { title: any; mainNoteContent: any };
-      }>(config.url + 'home/'+stringuserid+'/'+this.currentTextId)
-      .pipe(
-        map((ref) => {
-          const data = [];
-          for (const key in ref) {
-            if (ref.hasOwnProperty(key)) {
-              data.push({ ...ref[key], title: key });
-            }
-          }
-          return data;
-        })
-      )
-      .subscribe((data) => {
-        console.log(data);
-        this.allData = data;
-      });
-    console.log(stringuserid)
+    let requestOptions:RequestInit = {
+      method: 'GET',
+      redirect: 'follow'
+   };
+    
+    fetch( config +
+      'home/' +
+    this.stringuserid +
+      '/' , requestOptions)
+      .then(response => response.json())
+      .then(result => {
+        console.log(result)
+        this.allData = result
+      })
+      .catch(error => console.log('error', error));
+    // this.http
+    //   .get<{
+    //     [key: string]: { Page: any; Data: any };
+    //   }>(config.url + 'home/'+stringuserid+'/'+this.currentTextId)
+    //   .pipe(
+    //     map((ref) => {
+    //       const data = [];
+    //       for (const key in ref) {
+    //         if (ref.hasOwnProperty(key)) {
+    //           data.push({ ...ref[key], Page: key });
+    //         }
+    //       }
+    //       return data;
+    //     })
+    //   )
+    //   .subscribe((data) => {
+    //     console.log(data);
+    //     this.allData = data;
+    //   });
+    // console.log(stringuserid)
   }
 
   //delete data logic
 
-  deleteNote(title: string) {
+  deleteNote(Page: string) {
     let requestOptions:RequestInit = {
       method: 'DELETE',
       redirect: 'follow'
@@ -155,10 +177,19 @@ export class TextAreaComponent implements OnInit {
     //  setTimeout(this.fetchData(), 2)
   }
   logout() {
-    // localStorage.removeItem()
-    this.http
-      // .post<{ name: string }>(config.url , )
-      // .subscribe((ref) => { });
+    localStorage.removeItem('session_key')
+    localStorage.removeItem('userid')
+    let requestOptions:RequestInit = {
+      method: 'POST',
+      redirect: 'follow'
+    };
+    
+    fetch(config+"logout/", requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
+    
+    
     this.router.navigate(['/login']);
   }
 }

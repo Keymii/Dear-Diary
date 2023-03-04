@@ -24,7 +24,7 @@
                             class="c-form__input"
                             placeholder=" "
                             pattern="[^\s]+"
-                            required [(ngModel)]="data.userid">
+                            required [(ngModel)]="userData.userid">
     
                         <label class="c-form__next" for="progress2" role="button">
                             <span class="c-form__nextIcon"></span>
@@ -61,7 +61,7 @@
             id="fpass"
             class="c-form__input"
             placeholder=" "
-            required [(ngModel)]="data.pswd">
+            required [(ngModel)]="userData.pswd">
             <button (click)="login()" type="submit" class="c-form__next" for="finish" role="button"id="ab">
               <span class="c-form__nextIcon"></span>
             </button>
