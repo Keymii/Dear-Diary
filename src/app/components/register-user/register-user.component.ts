@@ -30,6 +30,6 @@ export class RegisterUserComponent {
     console.log(loginData);
   }
   disappear() {
-    document.getElementById('').style.visibility="hidden"
+    document.getElementById('disappear').style.visibility="hidden"
   }
 }

@@ -12,10 +12,9 @@
     <input class="c-checkbox" type="checkbox" id="progress3">
     <input class="c-checkbox" type="checkbox" id="finish">
     <div class="c-form__progress"></div>
-    
     <div class="c-formContainer">
       <div class="c-welcome">Hello</div>
-      <form class="c-form"   #loginForm="ngForm" (ngSubmit)="postLoginData(loginForm.value)">
+      <form class="c-form" >
         <div class="c-form__group">
           <label class="c-form__label" for="username">
                         <input
@@ -25,7 +24,7 @@
                             class="c-form__input"
                             placeholder=" "
                             pattern="[^\s]+"
-                            required ngModel>
+                            required [(ngModel)]="data.userid">
     
                         <label class="c-form__next" for="progress2" role="button">
                             <span class="c-form__nextIcon"></span>
@@ -62,8 +61,8 @@
             id="fpass"
             class="c-form__input"
             placeholder=" "
-            required ngModel>
-            <button type="submit" class="c-form__next" for="finish" role="button"id="ab">
+            required [(ngModel)]="data.pswd">
+            <button (click)="login()" type="submit" class="c-form__next" for="finish" role="button"id="ab">
               <span class="c-form__nextIcon"></span>
             </button>
             <!-- <input
@@ -76,9 +75,9 @@
           </label>
         </div>
         
-        <label class="c-form__toggle" for="start"  >Login<span class="c-form__toggleIcon"    id="c-form__toggleIcon"></span></label>
+        <label class="c-form__toggle" for="start" (click)="disappear()" >Login<span class="c-form__toggleIcon"    id="c-form__toggleIcon"></span></label>
         
-      </form>    <div  class="loginlink" id="linke" ><a routerLink="/register" class="linke">don't have a account yet? Create One</a></div>
+      </form>    <div  class="loginlink" id="linke" ><a routerLink="/register" id="disappear" class="linke">don't have a account yet? Create One</a></div>
     </div>
     </div>
 

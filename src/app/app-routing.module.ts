@@ -6,7 +6,8 @@ import { trigger, transition, style, animate } from '@angular/animations';
 import { TextAreaComponent } from './components/text-area/text-area.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { RegisterUserComponent } from './components/register-user/register-user.component';
-const routes: Routes = [ {path: '', component:LoginPageComponent},
+const routes: Routes = [
+  { path: '',redirectTo:'/login', pathMatch:'full' },
   { path: 'note', component:TextAreaComponent  },
   { path: 'login', component: LoginPageComponent },
   { path: 'register', component: RegisterUserComponent },

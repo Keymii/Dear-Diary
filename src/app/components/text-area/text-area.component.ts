@@ -1,10 +1,10 @@
-import { Router } from '@angular/router';
+import { QueryParamsHandling, Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { config } from '../../config';
 import { stringuserid } from '../login-page/login-page.component'
-// import { FormsModule } from '@angular/forms';
+import{ userData } from '../login-page/login-page.component'
 @Component({
   selector: 'app-text-area',
   templateUrl: './text-area.component.html',
@@ -21,9 +21,19 @@ export class TextAreaComponent implements OnInit {
     title?: any;
     mainNoteContent: any;
   };
-  ngOnInit() {
-    this.fetchData();
+
+  ngOnInit() { 
     document.getElementById('deleteNote').style.visibility = 'hidden';
+    document.getElementById("error").style.visibility = "hidden"
+    this.userloginornot()
+    console.log(localStorage.getItem('sessionkey'))
+  }
+  userloginornot() {
+    if (
+      localStorage.getItem('sessionkey') === userData.session_key) { this.fetchData(); }
+    else {
+      document.getElementById("error").style.visibility="visible"
+    }
   }
 
   constructor(public http: HttpClient, public router: Router) {}
@@ -81,18 +91,15 @@ export class TextAreaComponent implements OnInit {
     // setTimeout(this.fetchData, 2);
   }
   updateData(title: string, value: { title: any; mainNoteContent: any }) {
-    this.http
-      .put(
-        config +
-        'home/' +
-         stringuserid +
-          '/' +
-          this.currentTextId +
-          '/updatepage/',
-
-        value
-      )
-      .subscribe();
+    let requestOptions:RequestInit = {
+      method: 'POST',
+      redirect: 'follow'
+    };
+    
+    fetch("http://127.0.0.1:8000/renamePage/?userid=user1&page=Old Page&new_page=New Page", requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
     // setTimeout(this.fetchData,2)
   }
 
@@ -118,29 +125,40 @@ export class TextAreaComponent implements OnInit {
         console.log(data);
         this.allData = data;
       });
+    console.log(stringuserid)
   }
 
   //delete data logic
 
   deleteNote(title: string) {
-    this.http
-      .delete(config.url+
-        'deletepage/' 
-      )
-      .subscribe();
-    setTimeout(this.fetchData, 2);
+    let requestOptions:RequestInit = {
+      method: 'DELETE',
+      redirect: 'follow'
+    };
+    
+    fetch('http://127.0.0.1:8000/deletePage/?userid=' + userData.userid + '&page=New Page', requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
+    // setTimeout(this.fetchData, 2);
   }
   deleteThisNote(currentTextId: string) {
-    this.http
-      .delete(
-        config.url+
-        'deletepage/'
-      )
-      .subscribe();
+    let requestOptions:RequestInit = {
+      method: 'DELETE',
+      redirect: 'follow'
+    };
+    
+    fetch('http://127.0.0.1:8000/deletePage/?userid='+userData.userid+'&page=New Page', requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
     //  setTimeout(this.fetchData(), 2)
   }
   logout() {
     // localStorage.removeItem()
+    this.http
+      // .post<{ name: string }>(config.url , )
+      // .subscribe((ref) => { });
     this.router.navigate(['/login']);
   }
 }
