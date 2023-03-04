@@ -140,6 +140,7 @@ body {
   }
   
   .c-form {
+    /* margin-left: -988px; */
     position: relative;
     width: inherit;
     height: inherit;
@@ -329,4 +330,68 @@ body {
   .linke:hover {
     background-color: #008CBA;
     color: white;
+  }
+
+
+  .right {
+    display: inline-block;
+    width: 4em;
+    height: 4em;
+    border: 0.5em solid #000000;
+    border-radius: 50%;
+    margin-left: 1.5em;
+  }
+  
+
+  .right:after {
+    content: '';
+    display: inline-block;
+    margin-top: 1.05em;
+    margin-left: -0.6em;
+    width: 1.4em;
+    height: 1.4em;
+    border-top: 0.5em solid #584030;
+    border-right: 0.5em solid #584030;
+    -moz-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    margin-left:12px;
+  }
+
+
+  div.someone {
+    display: inline-block;
+    vertical-align: middle;
+    visibility:hidden;
+  }
+  
+  a.someone  {
+    display: inline-block;
+    border-radius: 50%;
+    /* margin-left: 885px; */
+    margin-top: -24px;
+    padding-top: 359px;
+    padding-left: 1000px;
+  }
+  
+  a.someone :hover  .right{
+    border: 0.5em solid #e74c3c;
+  }
+  
+  a.someone :hover  .right:after {
+    border-top: 0.5em solid #e74c3c;
+    border-right: 0.5em solid #e74c3c;
+  }
+
+  .error{
+    background: #F8D7DA;
+    margin-top: -130px;
+    width: 533px;
+    margin-left: 515px;
+    text-align: center;
+    padding: 8px 0;
+    border-radius: 5px;
+    color: #8B3E46;
+    border: 1px solid #F5C6CB;
+    visibility: hidden;
   }

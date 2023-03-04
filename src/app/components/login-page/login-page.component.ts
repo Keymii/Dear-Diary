@@ -31,6 +31,7 @@ export class LoginPageComponent {
     .then((response) => response.text())
     .then((result) => {
       localStorage.setItem('session_key', result);
+      localStorage.setItem('userid',result);
     })
     .catch((error) => {
     });
@@ -48,15 +49,31 @@ export class LoginPageComponent {
       .then((result) => {
         console.log(result);
         if (result === 'True') {
-          this.router.navigate(['note']);
+          document.getElementById('disappear').style.visibility = 'hidden';
+          document.getElementById('progressbar').style.width = '100vw';
+          const checkbox = document.getElementById("finish") as HTMLInputElement;
+          if (checkbox) {
+             checkbox.checked = true;
+          }
+          // document.getElementById('user-name').textContent = this.data.userid;
+          document.getElementById('welcomemessage').textContent = "Hello "+ this.data.userid + "!";
+          document.getElementById('someone').style.visibility = 'initial';
+          document.getElementById('errormess').style.visibility = 'hidden';
+          // function redirect() {
+          //   this.router.navigate(['note']);
+          // }
+          // setTimeout(redirect, 3000);
+        
         } else {
+          document.getElementById('errormess').style.visibility = 'initial';
         }
       })
-      .catch((error) => console.log('error', error));
+      .catch((error) => document.getElementById('errormess').style.visibility = 'initial');
+      // console.log('error', error));
   }
-  disappear() {
-    document.getElementById('disappear').style.visibility = 'hidden';
-  }
+  // disappear() {
+  //   document.getElementById('disappear').style.visibility = 'hidden';
+  // }
 }
-export let stringuserid;
+export let stringuserid=localStorage.getItem('userid');
 export let userData;
