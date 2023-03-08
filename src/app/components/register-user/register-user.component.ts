@@ -36,7 +36,6 @@ export class RegisterUserComponent implements OnInit{
         console.log(result);
         if (result ==="True") {
           this.router.navigate(['note']);
-        } else {
         }
       })
       .catch((error) => console.log('error', error));
@@ -44,15 +43,14 @@ export class RegisterUserComponent implements OnInit{
  
 
   newLoginData(loginData: { name: string; userid: string; pswd: string,session_key:string }) {
-    // const headers = new HttpHeaders({ myHeader: 'loginData' });
-    const specialKey = uuidv4();
-    const requestData = {
-      session_key: specialKey
-    };
+    const headers = new HttpHeaders({ myHeader: 'loginData' });
     this.http
       .post(config.url + 'register/?format=json', loginData)
-      .subscribe((ref) => {});
-    // console.log(loginData);
+      .subscribe((ref) => {
+        console.log("user exists")
+      });
+      this.router.navigate(['login'])
+
   }
   disappear() {
     document.getElementById('disappear').style.visibility="hidden"

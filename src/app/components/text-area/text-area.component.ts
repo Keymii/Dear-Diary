@@ -1,7 +1,12 @@
 import { QueryParamsHandling, Router } from '@angular/router';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ɵclearResolutionOfComponentResourcesQueue,
+} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-// import { map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { userData } from '../login-page/login-page.component';
 import { config } from '../../config';
 // import{userData} from '../login-page/login-page.component'
@@ -12,29 +17,32 @@ import { config } from '../../config';
 })
 export class TextAreaComponent implements OnInit {
   //type defined
-  currentTextId: string;
+currentTitleId:string
+ currentTextId: string;
   editMode: boolean = false;
-  allData: { Page: any; Data: any }[] = [];
+  allData: { page: any; data: any }[] = [];
+  titleData: { userid: any; page:any}[]=[]
   currentTitle: string;
+  // current
+  noteData: any
   @ViewChild('textForm') form: {
-    setValue(arg0: { Page: any; Data: any }): unknown;
-    Page?: any;
-    Data: any;
+    setValue(arg0: { page: any; data: any }): unknown;
+    page?: any;
+    data: any;
   };
-  stringuserid:string = localStorage.getItem('userid')
-  session_key:string =   localStorage.getItem('sessionkey')
-  ngOnInit() { 
+  stringuserid: string = localStorage.getItem('userid');
+  session_key: string = localStorage.getItem('sessionkey');
+  ngOnInit() {
     document.getElementById('deleteNote').style.visibility = 'hidden';
-    document.getElementById("error").style.visibility = "hidden"
+    document.getElementById('error').style.visibility = 'hidden';
     // this.userloginornot()
- this.fetchData()
-
+    this.fetchData();
   }
   userloginornot() {
-    if (
-      this.stringuserid === userData.session_key) { this.fetchData(); }
-    else {
-      document.getElementById("error").style.visibility="visible"
+    if (this.stringuserid === userData.session_key) {
+      this.fetchData();
+    } else {
+      document.getElementById('error').style.visibility = 'visible';
     }
   }
 
@@ -42,154 +50,170 @@ export class TextAreaComponent implements OnInit {
 
   // when one of the note is clicked in notes pannel
 
-  onNoteClicked(Page: string) {
+  onNoteClicked(page: string) {
     this.editMode = true;
-    let selectedNote = this.allData.find((p) => {
-      return p.Page === Page;
+    let selectedNote = this.noteData.find((p) => {
+      return p.page == page;
     });
-    this.currentTextId = Page;
+    this.currentTextId = page;
     this.form.setValue({
-      Page: selectedNote.Page,
-      Data: selectedNote.Data,
+      page: selectedNote.page,
+      data: selectedNote.data,
     });
     document.getElementById('deleteNote').style.visibility = 'visible';
+    console.log(this.currentTextId)
   }
 
   // add button logic
 
-  newNote(data: { Page: any; Data: any }) {
+  newNote(Data: { page: any; data: any }) {
     this.form.setValue({
-      Page: '',
-      Data: '',
+      page: '',
+      data: '',
     });
     this.editMode = false;
     document.getElementById('deleteNote').style.visibility = 'hidden';
   }
 
   // save button logic
-
-  editorSaveData(data: { Page: any; Data: any }) {
-    this.currentTitle=data.Page
+  // userid:string
+  editorSaveData(Data: { page: any; data: any }) {
+    // this.userid=this.stringuserid
+    this.currentTitle = Data.page;
     if (!this.editMode) {
-      this.saveMainContentData(data);
+      this.saveMainContentData(Data);
     } else {
-      this.updateData(this.currentTextId, data);
+      this.updateData(Data);
     }
   }
 
-  saveMainContentData(data: { Page: any; Data: any }) {
+  saveMainContentData(Data: { page: any; data: any }) {
+    // userid:this.stringuserid
+    // console.log(data.userid)
     //     let requestOptions:RequestInit = {
     //     method: 'POST',
     //     redirect: 'follow',
     //     body: JSON.stringify(data)
-    // };      
-    this.http.post<{ data: { Page: any; Data: any }, }>(config.url + 'home/'+this.stringuserid+'/'+this.currentTitle).subscribe((ref) => {
-      console.log(ref);
-    });
-      // fetch( config +
-      //   'home/' +this.stringuserid
-      //   +'/'+
-      //   this.currentTitle +
-      //   '/createpagedata/', requestOptions)
-      //   .then(response => response.text())
-      //   .then(result => console.log(result))
-      //   .catch(error => console.log('error', error));
-      //   // this.newNote(data);
-  
+    // };
+    this.http
+      .post(
+        config.url +
+          'home/' +
+          this.stringuserid +
+          '/' +
+          this.currentTitle +
+          '/createpagedata/',
+        Data
+      )
+      .subscribe((ref) => {});
+    // fetch( config +
+    //   'home/' +this.stringuserid
+    //   +'/'+
+    //   this.currentTitle +
+    //   '/createpagedata/', requestOptions)
+    //   .then(response => response.text())
+    //   .then(result => console.log(result))
+    //   .catch(error => console.log('error', error));
+    //   // this.newNote(data);
   }
-  updateData(Page: string, value: { Page: any; Data: any }) {
-    let requestOptions:RequestInit = {
-      method: 'POST',
-      redirect: 'follow'
-    };
-    
-    fetch("http://127.0.0.1:8000/renamePage/?userid=user1&page=Old Page&new_page=New Page", requestOptions)
-      .then(response => response.text())
-      .then(result => console.log(result))
-      .catch(error => console.log('error', error));
-    // setTimeout(this.fetchData,2)
+  updateData( Data: { page: any; data: any }) {
+    console.log(this.currentTextId)
+    // let requestOptions: RequestInit = {
+    //   method: 'PUT',
+    //   redirect: 'follow',
+    // };
+    // fetch(
+    //   config.url+'home/'+this.stringuserid+'/'+this.currentTitle+'/updatepagedata/',
+    //   requestOptions
+    //   )
+    //   .then((response) => response.text())
+    //   .then((result) => console.log(result))
+    //   .catch((error) => console.log('error', error));
+      this.http.put(config.url+'home/'+this.stringuserid+'/'+this.currentTextId+'/updatepagedata/',Data).subscribe((ref)=>{})
+      setTimeout(() => {
+        this.fetchData()
+      }, 10);
   }
 
   //data fetching from servers
-
   private fetchData() {
-    let requestOptions:RequestInit = {
-      method: 'GET',
-      redirect: 'follow'
-   };
-    
-    fetch( config +
-      'home/' +
-    this.stringuserid +
-      '/' , requestOptions)
-      .then(response => response.json())
-      .then(result => {
-        console.log(result)
-        this.allData = result
-      })
-      .catch(error => console.log('error', error));
-    // this.http
-    //   .get<{
-    //     [key: string]: { Page: any; Data: any };
-    //   }>(config.url + 'home/'+stringuserid+'/'+this.currentTextId)
-    //   .pipe(
-    //     map((ref) => {
-    //       const data = [];
-    //       for (const key in ref) {
-    //         if (ref.hasOwnProperty(key)) {
-    //           data.push({ ...ref[key], Page: key });
-    //         }
-    //       }
-    //       return data;
-    //     })
-    //   )
-    //   .subscribe((data) => {
-    //     console.log(data);
-    //     this.allData = data;
-    //   });
-    // console.log(stringuserid)
-  }
+    // let requestOptions: RequestInit = {
+    //   method: 'GET',
+    //   redirect: 'follow',
+    // };
 
+    // fetch(config + 'home/' + this.stringuserid + '/', requestOptions)
+    //   .then((response) => response.json())
+    //   .then((result) => {
+    //     console.log(result);
+    //     this.allData = result;
+    //   })
+    //   .catch((error) => console.log('error', error));
+
+    this.http
+      .get(config.url + 'pagewithdata/' + this.stringuserid + '/')
+      // .pipe(
+        // map(() => 
+      // ))
+      .subscribe((data) => {
+        this.noteData = data;
+        console.log(data);
+      });
+  }
   //delete data logic
 
-  deleteNote(Page: string) {
-    let requestOptions:RequestInit = {
-      method: 'DELETE',
-      redirect: 'follow'
-    };
+  deleteNote(page: string) {
+     this.noteData.find((p) => {
+      return p.page == page;
+    });
+    this.currentTitleId = page;
+// this.http.delete(
+//   config.url +'deletePage/?userid='+
+//   this.stringuserid  +
+//       '/&page='+this.currentTitleId+'/'   ).subscribe((ref => { }))
     
-    fetch('http://127.0.0.1:8000/deletePage/?userid=' + userData.userid + '&page=New Page', requestOptions)
-      .then(response => response.text())
-      .then(result => console.log(result))
-      .catch(error => console.log('error', error));
-    // setTimeout(this.fetchData, 2);
+    
+var requestOptions:RequestInit = {
+  method: 'DELETE',
+  redirect: 'follow'
+};
+
+fetch(config.url+'deletePage/'+this.stringuserid+'/'+this.currentTitleId, requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
   }
-  deleteThisNote(currentTextId: string) {
-    let requestOptions:RequestInit = {
+  deleteThisNote(page: string) {
+
+      this.noteData.find((p) => {
+       return p.page == page;
+     });
+     this.currentTitleId = page;
+ 
+     var requestOptions:RequestInit = {
       method: 'DELETE',
       redirect: 'follow'
     };
     
-    fetch('http://127.0.0.1:8000/deletePage/?userid='+userData.userid+'&page=New Page', requestOptions)
+    fetch(config.url+'deletePage/'+this.stringuserid+'/'+this.currentTitleId, requestOptions)
       .then(response => response.text())
       .then(result => console.log(result))
       .catch(error => console.log('error', error));
     //  setTimeout(this.fetchData(), 2)
   }
   logout() {
-    localStorage.removeItem('session_key')
-    localStorage.removeItem('userid')
-    let requestOptions:RequestInit = {
+    localStorage.removeItem('session_key');
+    localStorage.removeItem('userid');
+    let requestOptions: RequestInit = {
       method: 'POST',
-      redirect: 'follow'
+      redirect: 'follow',
     };
-    
-    fetch(config+"logout/", requestOptions)
-      .then(response => response.text())
-      .then(result => console.log(result))
-      .catch(error => console.log('error', error));
-    
-    
+
+    fetch(config + 'logout/', requestOptions)
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log('error', error));
+
     this.router.navigate(['/login']);
   }
 }
