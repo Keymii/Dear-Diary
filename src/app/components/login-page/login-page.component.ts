@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import{BalloonsComponent} from '../balloons/balloons.component';
+
 
 @Component({
   selector: 'app-login-page',
@@ -56,9 +58,10 @@ export class LoginPageComponent {
              checkbox.checked = true;
           }
           // document.getElementById('user-name').textContent = this.data.userid;
-          document.getElementById('welcomemessage').textContent = "Hello "+ this.data.userid + "!";
+          document.getElementById('welcomemessage').textContent = "Welcome back "+ this.data.userid + "!";
           document.getElementById('someone').style.visibility = 'initial';
           document.getElementById('errormess').style.visibility = 'hidden';
+          document.getElementById('appballoons').style.visibility = 'initial';
           // function redirect() {
           //   this.router.navigate(['note']);
           // }

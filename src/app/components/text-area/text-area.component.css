@@ -38,7 +38,7 @@ div.title div.individual-title {
 
 .sidebar{
   scroll-behavior: auto;
-  height: 400px;
+  height: 300px;
   overflow-y: auto;
   overflow-x: hidden;
   padding-right: 10px;
@@ -69,6 +69,7 @@ div.title div.individual-title {
   margin-top: 3%;
   padding: 4px;
   font-size: 20px;
+  cursor: pointer;
 }
 .addnote{
   margin-top: 3%;
@@ -241,9 +242,11 @@ span{
 
 form{
     min-width: 1000px;
+
 }
 form input{
     height: 50px;
+    cursor: pointer;
 
 }
 
@@ -266,4 +269,101 @@ form input#necessary-text{
     background: url("https://i.imgur.com/0kjMcUe.png");
     filter: brightness(0.95) sepia(30%) saturate(80%);
     filter: drop-shadow(5px 5px 25px black);
+}
+
+
+.vertical-line {
+  border-left: 1px solid black;
+  height: 100px; /* Change the height as needed */
+}
+.login-panel{
+  display: flex;
+  margin-top: 20px;
+  margin-left: -25px;
+}
+
+.user{
+  padding-top: 10px ;
+  padding-right: 20px;
+}
+
+.paneldetails{
+  padding-top: 20px;
+  margin-left: 20px;
+}
+
+.panelname{
+color: black ;
+}
+
+.panel-userid{
+margin-top: 5px;
+color: whitesmoke;
+}
+
+.logout{
+  padding-top: 4px;
+}
+.logout:hover{
+  color:rgb(164, 36, 36);
+  cursor: pointer;
+
+}
+
+
+
+.balloon {
+  --balloonDimension: 5vmax; /* 15% of min(viewport width, height) */
+  width: var(--balloonDimension);
+  height: var(--balloonDimension);
+  border-radius: 100% 100% 15% 100%;
+  margin: 0 0 0 25px;
+  transform: rotateZ(45deg);
+  position: fixed;
+  bottom: calc(-1 * var(--balloonDimension));
+  left: 0;
+  background-color: aqua;
+}
+.balloon::before {
+  content: "";
+  width: 10%;
+  height: 25%;
+  background: radial-gradient(circle, rgba(255,255,255,.7) 0%, rgba(255,255,255,.1) 100%);
+  position: absolute;
+  left: 15%;
+  top: 45%;
+  border-radius: 100%;
+}
+.balloon::after {
+  content: "";
+  width: 13%;
+  height: 5%;
+  background-color: inherit;
+  position: absolute;
+  left: 90%;
+  top: 94%;
+  border-radius: 22%;
+  transform: rotateZ(-45deg);
+}
+.balloon .string {
+  position: absolute;
+  background-color: #990;
+  width: 2px;
+  height: calc(var(--balloonDimension) * .6);
+  transform-origin: top center;
+  transform: rotateZ(-45deg);
+  top: calc(var(--balloonDimension) - 6px);
+  left: calc(var(--balloonDimension) - 8px);
+}
+.yellow{
+  background-color: rgba(150, 150, 0, .45);
+}
+.green{
+  background-color: rgba(0, 150, 0, .45);
+}
+.blue{
+  background-color: rgba(0, 0, 150, .45);
+}
+.red{
+  background-color: rgba(150, 0, 0, .45);
 }

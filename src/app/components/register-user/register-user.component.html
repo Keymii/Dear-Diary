@@ -11,10 +11,17 @@
   <input class="c-checkbox" type="checkbox" id="progress2">
   <input class="c-checkbox" type="checkbox" id="progress3">
   <input class="c-checkbox" type="checkbox" id="finish">
-  <div class="c-form__progress"></div>
+  <div class="c-form__progress" id ="progressbar"></div>
+  <div id="appballoons" >
+    <app-balloons></app-balloons></div>
+  <div class="someone" id ="someone">
+    <a class="someone" routerLink="/note" >
+      <span class="right"></span>
+    </a>
+  </div>
   
   <div class="c-formContainer">
-    <div class="c-welcome">Welcome aboard!</div>
+    <div class="c-welcome" id ="welcomemessage">Welcome aboard!</div>
     <form class="c-form" #formdata="ngForm" (ngSubmit)="newLoginData(formdata.value)" >
       <div class="c-form__group">
         <label class="c-form__label" for="username">
@@ -40,11 +47,12 @@
         <label class="c-form__label" for="femail">
                       <input
                       name="userid"
-                          type="email"
+                          type="text"
                           id="femail"
                           class="c-form__input"
                           placeholder=" "
-                          pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
+                          
+                          
                           required
                           ngModel>
   
@@ -52,7 +60,7 @@
                           <span class="c-form__nextIcon"></span>
                       </label>
   
-        <span class="c-form__groupLabel">What's your email?</span>
+        <span class="c-form__groupLabel">What UserID do you want?</span>
         <b class="c-form__border"></b>
         </label>
       </div>
@@ -76,11 +84,11 @@
         </label>
       </div>
   
-      <label class="c-form__toggle" for="start" (click)=" disappear()">Register<span class="c-form__toggleIcon"></span></label>
+      <label class="c-form__toggle" for="start" >Register<span class="c-form__toggleIcon"></span></label>
     </form>
-    <div class="loginlink"><a routerLink="/login" id="disappear"  class="linke">Already have a account? Login </a></div>
+    <div class="loginlink"><a routerLink="/login" id="disappear"  class="linke">Already have an account? Login </a></div>
 
   </div>
   </div>
 
- 
+  <!-- pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" -->

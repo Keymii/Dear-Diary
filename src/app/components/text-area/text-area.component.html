@@ -30,13 +30,24 @@
         </div>
       </div>
       
+      
     </div>
     <div class="addnote">
       <button class="new-note" (click)="newNote(textForm.value)">
         ADD NOTE <i class="fa fa-plus"></i>
       </button>
     </div>
+    <div class="login-panel">
+      <img class = "user" src="https://freesvg.org/img/abstract-user-flat-4.png" height="70px" width="70px">
+      <!-- <img class = "user" src="https://o.remove.bg/downloads/d168a75a-bd46-4fed-ab3b-035b1237aab7/download-removebg-preview.png" height="70px" width="70px"> -->
+      <div class="vertical-line" ></div>
+      <div class="paneldetails">
+      <!-- <div class="panelname"><p>Akshat Jain</p></div> -->
+      <div class="panel-userid"><p>@akshat1423</p></div>
+      <div class="logout"><a class="logoutButton"  (click)="logout()">Logout</a></div></div>
+    </div>
   </div>
+  
   <form #textForm="ngForm" (ngSubmit)="editorSaveData(textForm.value)">
     <div class="title">
       <input
@@ -72,5 +83,5 @@
     </div>
   </form>
 
-  <a (click)="logout()">logout</a>
+
 </div>

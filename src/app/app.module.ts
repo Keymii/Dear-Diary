@@ -8,12 +8,13 @@ import { AppComponent } from './app.component';
 import { TextAreaComponent } from './components/text-area/text-area.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { RegisterUserComponent } from './components/register-user/register-user.component';
+import { BalloonsComponent } from './components/balloons/balloons.component';
 
 
 
 
 @NgModule({
-  declarations: [AppComponent, TextAreaComponent, LoginPageComponent, RegisterUserComponent],
+  declarations: [AppComponent, TextAreaComponent, LoginPageComponent, RegisterUserComponent, BalloonsComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

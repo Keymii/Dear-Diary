@@ -131,7 +131,8 @@ body {
     position: absolute;
     width: max-content;
     height: inherit;
-    font-size: 40px;
+    /* font-size: 40px; */
+    font-size: 69px;
     color: black;
     font-family: "Josefin Slab", serif;
     text-shadow: 0.2px 0.2px 1.3px sienna;
@@ -366,12 +367,18 @@ body {
   }
   
   a.someone  {
+    /* display: inline-block;
+    border-radius: 50%;
+     margin-left: 885px; */
+    /* margin-top: -24px;
+    padding-top: 359px;
+    padding-left: 1000px; */
+
     display: inline-block;
     border-radius: 50%;
-    /* margin-left: 885px; */
-    margin-top: -24px;
+    margin-top: -14px;
     padding-top: 359px;
-    padding-left: 1000px;
+    padding-left: 1319px;
   }
   
   a.someone :hover  .right{
@@ -393,5 +400,9 @@ body {
     border-radius: 5px;
     color: #8B3E46;
     border: 1px solid #F5C6CB;
+    visibility: hidden;
+  }
+
+  #appballoons{
     visibility: hidden;
   }

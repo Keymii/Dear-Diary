@@ -172,12 +172,17 @@ import { map } from 'rxjs/operators';
 import { config } from '../../config';
 import{stringuserid, userData} from '../login-page/login-page.component'
 
+
 @Component({
   selector: 'app-text-area',
   templateUrl: './text-area.component.html',
   styleUrls: ['./text-area.component.css'],
 })
+
+
+
 export class TextAreaComponent implements OnInit {
+  
   //type defined
   currentTextId: string;
   editMode: boolean = false;
@@ -353,6 +358,9 @@ export class TextAreaComponent implements OnInit {
       .catch(error => console.log('error', error));
     //  setTimeout(this.fetchData(), 2)
   }
+
+  
+  
   logout() {
     localStorage.removeItem('session_key')
     let requestOptions:RequestInit = {
@@ -369,3 +377,4 @@ export class TextAreaComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 }
+
