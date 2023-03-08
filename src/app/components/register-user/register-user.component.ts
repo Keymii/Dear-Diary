@@ -49,7 +49,9 @@ export class RegisterUserComponent implements OnInit{
       .subscribe((ref) => {
         console.log("user exists")
       });
-      this.router.navigate(['login'])
+      setTimeout(() => {
+        this.router.navigate(['login'])
+      }, 50);
 
   }
   disappear() {

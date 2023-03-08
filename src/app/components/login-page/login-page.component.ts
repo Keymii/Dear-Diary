@@ -54,10 +54,12 @@ export class LoginPageComponent implements OnInit{
       response.text())
       .then((result) => {
         console.log(result);
-        if (result ==="True") {
-          this.router.navigate(['note']);
-        } else {
-        }
+       setTimeout(() => {
+         if (result ==="True") {
+           this.router.navigate(['note']);
+         } else {
+         }
+       }, 500);
       })
       .catch((error) => console.log('error', error));
     

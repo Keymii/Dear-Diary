@@ -115,6 +115,9 @@ currentTitleId:string
     //   .then(result => console.log(result))
     //   .catch(error => console.log('error', error));
     //   // this.newNote(data);
+    setTimeout(() => {
+      this.fetchData()
+    }, 10);
   }
   updateData( Data: { page: any; data: any }) {
     console.log(this.currentTextId)
@@ -199,7 +202,9 @@ fetch(config.url+'deletePage/'+this.stringuserid+'/'+this.currentTitleId, reques
       .then(response => response.text())
       .then(result => console.log(result))
       .catch(error => console.log('error', error));
-    //  setTimeout(this.fetchData(), 2)
+      setTimeout(() => {
+        this.fetchData()
+      }, 10);
   }
   logout() {
     localStorage.removeItem('session_key');
