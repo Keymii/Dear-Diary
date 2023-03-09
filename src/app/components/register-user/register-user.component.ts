@@ -1,9 +1,7 @@
 import { userData } from './../login-page/login-page.component';
 import { Router } from '@angular/router';
-import { style } from '@angular/animations';
-import { Component, ViewChild, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { HttpHeaders } from '@angular/common/http';
 import { config } from '../../config';
 import { CustomHttpClientService } from '../../httpClient.service';
 import { v4 as uuidv4 } from 'uuid';
@@ -14,10 +12,11 @@ import{BalloonsComponent} from '../balloons/balloons.component'
   templateUrl: './register-user.component.html',
   styleUrls: ['./register-user.component.css'],
 })
-export class RegisterUserComponent implements OnInit{
-  OnInit() { document.getElementById('disappear').style.visibility = "visible" }
-  loginData: {name:string,userid:string, pswd:string,session_key:string}
-  constructor(private http: CustomHttpClientService,private router:Router) {}
+export class RegisterUserComponent implements OnInit {
+  constructor(private http: CustomHttpClientService, private router: Router) {}
+
+  //initialiser
+
   ngOnInit(): void {
     var myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
@@ -28,28 +27,44 @@ export class RegisterUserComponent implements OnInit{
       redirect: 'follow',
     };
     fetch(
-      'http://127.0.0.1:8000/checkLogin/?session_key=' +
-      localStorage.getItem('session_key'),
+      config.url +
+        'checkLogin/?session_key=' +
+        localStorage.getItem('session_key'),
       requestParam
-      )
-      .then((response) => 
-      response.text())
+    )
+      .then((response) => response.text())
       .then((result) => {
-        console.log(result);
-        if (result ==="True") {
+        if (result === 'True') {
           this.router.navigate(['note']);
+          console.log("Session exist, auto login")
+
+        } else {
+          console.log(
+            'You do not have any active login session, try login again or create new user'
+          );
         }
       })
-      .catch((error) => console.log('error', error));
+      .catch(() => {
+        console.error('error connecting servers');
+      });
   }
- 
 
-  newLoginData(loginData: { name: string; userid: string; pswd: string,session_key:string }) {
-    const headers = new HttpHeaders({ myHeader: 'loginData' });
-    this.http
-      .post(config.url + 'register/?format=json', loginData)
-      .subscribe((ref) => {
-        console.log("user exists")
+  // sending req to server for registering new user
+
+  newLoginData(loginData: { name: string; userid: string; pswd: string }) {
+    var myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+    let requestParam: RequestInit = {
+      method: 'POST',
+      headers: myHeaders,
+      body: JSON.stringify(loginData),
+      redirect: 'follow',
+    };
+    fetch(config.url + 'register/?format=json', requestParam)
+      .then((response) => response.text())
+      .then((result) => {
+        if (result === 'True') {
+      
         document.getElementById('disappear').style.visibility="hidden"
         document.getElementById('progressbar').style.width = '100vw';
               const checkbox = document.getElementById("finish") as HTMLInputElement;
@@ -57,20 +72,26 @@ export class RegisterUserComponent implements OnInit{
                  checkbox.checked = true;
               }
               // document.getElementById('user-name').textContent = this.data.userid;
-              document.getElementById('welcomemessage').textContent = "Welcome Aboard "+ this.loginData.name + "!";
+              document.getElementById('welcomemessage').textContent = "Welcome Aboard "+ loginData.name + "!";
               document.getElementById('someone').style.visibility = 'initial';
               document.getElementById('appballoons').style.visibility = 'initial';
-      });
-      // setTimeout(() => {
-        
-        // this.router.navigate(['login'])
-      // }, 50);
+        } else {
+          console.log("user already exist")
+          document.getElementById('errormess').style.visibility = 'initial';
+        }
+      })
+      .catch(() => console.error('error connecting servers'));
+    
+    
 
+    setTimeout(() => {
+      this.router.navigate(['login']);
+    }, 10000);
   }
-  // disappear() {
-   
-  // }
-  // disappear() {
-  //   document.getElementById('disappear').style.visibility="hidden"
-  // }
+
+  // when register button is clicked the button disappears logic
+
+  disappear() {
+    document.getElementById('disappear').style.visibility = 'hidden';
+  }
 }

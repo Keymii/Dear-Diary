@@ -1,9 +1,10 @@
-<div id="errormes">Not Allowed</div><div class="container">
+<div id="errormes"><div class="errormessage1"><a routerLink="/login" style="cursor: pointer;">Please Login</a></div><p style="padding-left: 600px; font-size: 40px;">You ain't logged in.</p></div>
+<div class="container">
   <!-- <div id="error">
     <h3>You are not LoggedIn</h3>
     <button routerLink="/login">Login</button>
   </div> -->
-  <div class="side-nav">
+  <div class="side-nav" id="sidenav">
     <div class="headnav">
       <h1 align="center"><span>I</span>ndex</h1>
     </div>
@@ -59,18 +60,20 @@
         ngModel
       />
     </div>
-    <div class="text-area">
+    <div class="text-area" id="textbb">
       <textarea
         class="text-box1"
         placeholder="Share Something about today?"
         name="data"
         ngModel
+        id="textbox12"
       ></textarea>
     </div>
     <div class="edit">
       <input
         class="sub"
         type="submit"
+        id="subbutt"
         value="{{ editMode ? 'Edit' : 'Save' }}"
       />
       <input

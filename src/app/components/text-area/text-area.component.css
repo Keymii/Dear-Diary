@@ -105,6 +105,7 @@ span{
   padding-top: 3%;
   border-radius: 7px;
   margin-top: 1%;
+  width: 220px !important;
   }
 
   /* #myDiv {
@@ -369,5 +370,21 @@ color: whitesmoke;
 }
 #errormes{
   visibility: hidden;
-  font-size: 100px;
+  position: fixed;
+  left: 0;
+  height: 100%;
+  width: 0;
+  /* background-color: #0069ec; */
+  background: url("https://i.imgur.com/0kjMcUe.png");
+  transition: 0.3s;
+  opacity: 0.8;
+  filter: brightness(0.95) sepia(30%) saturate(80%);
+  width: 100vw;
+  margin-top: -27px;
+}
+
+.errormessage1{
+  font-size:100px;
+  padding-left: 500px;
+  padding-top: 300px;
 }

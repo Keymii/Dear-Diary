@@ -392,3 +392,17 @@ a.someone :hover  .right:after {
 #appballoons{
   visibility: hidden;
 }
+
+
+.error{
+  background: #F8D7DA;
+  margin-top: -130px;
+  width: 533px;
+  margin-left: 515px;
+  text-align: center;
+  padding: 8px 0;
+  border-radius: 5px;
+  color: #8B3E46;
+  border: 1px solid #F5C6CB;
+  visibility: hidden;
+}

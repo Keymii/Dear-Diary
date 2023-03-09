@@ -11,7 +11,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { config } from '../../config';
 import{ userData} from '../login-page/login-page.component'
-
+import { string_key } from '../login-page/login-page.component';
 
 @Component({
   selector: 'app-text-area',
@@ -19,41 +19,53 @@ import{ userData} from '../login-page/login-page.component'
   styleUrls: ['./text-area.component.css'],
 })
 
-
-
 export class TextAreaComponent implements OnInit {
   
   //type defined
-currentTitleId:string
- currentTextId: string;
+  currentTitleId: string;
+  currentTextId: string;
   editMode: boolean = false;
-  allData: { page: any; data: any }[] = [];
-  titleData: { userid: any; page:any}[]=[]
   currentTitle: string;
+  noteData: any;
+  stringuserid: string = localStorage.getItem('userid');
+  session_key: string = localStorage.getItem('sessionkey');
+  Data: { page: any; data: any }
+
   // current
-  noteData: any
+
   @ViewChild('textForm') form: {
     setValue(arg0: { page: any; data: any }): unknown;
     page?: any;
     data: any;
   };
-  stringuserid: string = localStorage.getItem('userid');
-  session_key: string = localStorage.getItem('sessionkey');
+
+  // initialiser
+  // userloginornot() {
+    
+  // }
+
   ngOnInit() {
     document.getElementById('deleteNote').style.visibility = 'hidden';
-    document.getElementById('error').style.visibility = 'hidden';
-    this.userloginornot()
-    this.fetchData();
+    // document.getElementById('error').style.visibility = 'hidden';
+    // this.userloginornot()
+    // this.fetchData();
     // console.log(this.stringuserid)
-    document.getElementById('useridpanel').textContent = localStorage.getItem('userid');
-  }
-  userloginornot() {
-    if (this.stringuserid === userData.session_key) {
+    document.getElementById('useridpanel').textContent = "@"+localStorage.getItem('userid');
+    console.log(this.session_key);
+    this.fetchData();
+    if (string_key!=null) {
       this.fetchData();
+      console.log("bye");
     } else {
-      document.getElementById('errormes').style.visibility = 'visible';
+      document.getElementById('errormes').style.visibility = 'initial';
+      document.getElementById('necessary-text').style.visibility = 'hidden';
+      document.getElementById('textbox12').style.visibility = 'hidden';
+      document.getElementById('sidenav').style.visibility = 'hidden';
+      document.getElementById('subbutt').style.visibility = 'hidden';
+      document.getElementById('textbb').style.visibility = 'hidden';
     }
   }
+ 
 
   constructor(public http: HttpClient, public router: Router) {}
 
@@ -65,15 +77,15 @@ currentTitleId:string
       return p.page == page;
     });
     this.currentTextId = page;
-    this.form.setValue({
+    this.form.setValue({           //sets value in note title and data
       page: selectedNote.page,
       data: selectedNote.data,
     });
     document.getElementById('deleteNote').style.visibility = 'visible';
-    console.log(this.currentTextId)
+    console.log(this.currentTextId);
   }
 
-  // add button logic
+  // addnew note button logic
 
   newNote(Data: { page: any; data: any }) {
     this.form.setValue({
@@ -84,10 +96,10 @@ currentTitleId:string
     document.getElementById('deleteNote').style.visibility = 'hidden';
   }
 
-  // save button logic
-  // userid:string
+
+//  when editbutton is clicked one if the two function below runs based on the condition in editorSaveData
+
   editorSaveData(Data: { page: any; data: any }) {
-    // this.userid=this.stringuserid
     this.currentTitle = Data.page;
     if (!this.editMode) {
       this.saveMainContentData(Data);
@@ -97,7 +109,6 @@ currentTitleId:string
   }
 
   saveMainContentData(Data: { page: any; data: any }) {
-
     this.http
       .post(
         config.url +
@@ -113,17 +124,32 @@ currentTitleId:string
     setTimeout(() => {
       this.fetchData()
     }, 50);
+    this.newNote(this.Data)
   }
-  updateData( Data: { page: any; data: any }) {
-    console.log(this.currentTextId)
-    
-      this.http.put(config.url+'home/'+this.stringuserid+'/'+this.currentTextId+'/updatepagedata/',Data).subscribe((ref)=>{})
-      setTimeout(() => {
-        this.fetchData()
-      }, 10);
+  updateData(Data: { page: any; data: any }) {
+    console.log(this.currentTextId);
+
+    this.http
+      .put(
+        config.url +
+          'home/' +
+          this.stringuserid +
+          '/' +
+          this.currentTextId +
+          '/updatepagedata/',
+        Data
+      )
+      .subscribe((ref) => {});
+    setTimeout(() => {
+      this.fetchData();
+    }, 50);
+    this.newNote(this.Data)
   }
 
-  //data fetching from servers
+
+
+// to get data from servers
+
   private fetchData() {
    
 
@@ -135,13 +161,17 @@ currentTitleId:string
         console.log(data);
       });
   }
+
+
+
   //delete data logic
 
   deleteNote(page: string) {
-     this.noteData.find((p) => {
+    this.noteData.find((p) => {
       return p.page == page;
     });
     this.currentTitleId = page;
+    
 
     
     
@@ -150,34 +180,55 @@ var requestOptions:RequestInit = {
   redirect: 'follow'
 };
 
-fetch(config.url+'deletePage/'+this.stringuserid+'/'+this.currentTitleId, requestOptions)
-  .then(response => response.text())
-  .then(result => console.log(result))
-  .catch(error => console.log('error', error));
+    fetch(
+      config.url +
+        'deletePage/' +
+        this.stringuserid +
+        '/' +
+        this.currentTitleId,
+      requestOptions
+    )
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log('error', error));
+
+    setTimeout(() => {
+      this.fetchData();
+    }, 50);
+    this.newNote(this.Data)
   }
   deleteThisNote(page: string) {
+    this.noteData.find((p) => {
+      return p.page == page;
+    });
+    this.currentTitleId = page;
 
-      this.noteData.find((p) => {
-       return p.page == page;
-     });
-     this.currentTitleId = page;
- 
-     var requestOptions:RequestInit = {
+    var requestOptions: RequestInit = {
       method: 'DELETE',
-      redirect: 'follow'
+      redirect: 'follow',
     };
-    
-    fetch(config.url+'deletePage/'+this.stringuserid+'/'+this.currentTitleId, requestOptions)
-      .then(response => response.text())
-      .then(result => console.log(result))
-      .catch(error => console.log('error', error));
-      setTimeout(() => {
-        this.fetchData()
-      }, 10);
+
+    fetch(
+      config.url +
+        'deletePage/' +
+        this.stringuserid +
+        '/' +
+        this.currentTitleId,
+      requestOptions
+    )
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log('error', error));
+
+    setTimeout(() => {
+      this.fetchData();
+    }, 50);
+    this.newNote
   }
 
-  
-  
+
+
+  // logout button logic
   logout() {
     localStorage.removeItem('session_key');
     localStorage.removeItem('userid');
@@ -192,6 +243,8 @@ fetch(config.url+'deletePage/'+this.stringuserid+'/'+this.currentTitleId, reques
       .catch((error) => console.log('error', error));
 
     this.router.navigate(['/login']);
-  }
+  
+
+  }
 }
 

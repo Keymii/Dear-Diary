@@ -19,7 +19,7 @@
       <span class="right"></span>
     </a>
   </div>
-  
+  <div class="error" id="errormess">User Already Exists.</div>
   <div class="c-formContainer">
     <div class="c-welcome" id ="welcomemessage">Welcome aboard!</div>
     <form class="c-form" #formdata="ngForm" (ngSubmit)="newLoginData(formdata.value)" >
@@ -39,7 +39,7 @@
                           <span class="c-form__nextIcon"></span>
                       </label>
   
-        <span class="c-form__groupLabel">Create your username.</span>
+        <span class="c-form__groupLabel">What is your Name?</span>
         <b class="c-form__border"></b>
         </label>
       </div>
