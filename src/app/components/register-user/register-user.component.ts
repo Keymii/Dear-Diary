@@ -1,21 +1,22 @@
 import { userData } from './../login-page/login-page.component';
 import { Router } from '@angular/router';
-import { style } from '@angular/animations';
-import { Component, ViewChild, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import {  HttpHeaders } from '@angular/common/http';
 import { config } from '../../config';
 import { CustomHttpClientService } from '../../httpClient.service';
-import { v4 as uuidv4 } from 'uuid';
+
 @Component({
   selector: 'app-register-user',
   templateUrl: './register-user.component.html',
   styleUrls: ['./register-user.component.css'],
 })
-export class RegisterUserComponent implements OnInit{
-  OnInit() { document.getElementById('disappear').style.visibility = "visible" }
-  loginData: {name:string,userid:string, pswd:string,session_key:string}
-  constructor(private http: CustomHttpClientService,private router:Router) {}
+export class RegisterUserComponent implements OnInit{ 
+
+  constructor(private http: CustomHttpClientService, private router: Router) { }
+  
+
+//initialiser
+
   ngOnInit(): void {
     var myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
@@ -26,7 +27,7 @@ export class RegisterUserComponent implements OnInit{
       redirect: 'follow',
     };
     fetch(
-      'http://127.0.0.1:8000/checkLogin/?session_key=' +
+      config.url+'checkLogin/?session_key=' +
       localStorage.getItem('session_key'),
       requestParam
       )
@@ -38,23 +39,31 @@ export class RegisterUserComponent implements OnInit{
           this.router.navigate(['note']);
         }
       })
-      .catch((error) => console.log('error', error));
+      .catch(() => console.log('You do not have any active login session, try login again or create new user'));
   }
  
+
+
+
+  // sending req to server for registering new user
 
   newLoginData(loginData: { name: string; userid: string; pswd: string,session_key:string }) {
     const headers = new HttpHeaders({ myHeader: 'loginData' });
     this.http
       .post(config.url + 'register/?format=json', loginData)
-      .subscribe((ref) => {
-        console.log("user exists")
-      });
+      .subscribe()
+    
       setTimeout(() => {
         this.router.navigate(['login'])
       }, 50);
 
   }
+
+
+
+  // when register button is clicked the button disappears logic
+
   disappear() {
-    document.getElementById('disappear').style.visibility="hidden"
+    document.getElementById('disappear').style.visibility = "hidden";
   }
 }
