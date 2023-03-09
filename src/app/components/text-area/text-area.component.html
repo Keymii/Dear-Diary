@@ -1,4 +1,4 @@
-<div class="container">
+<div id="errormes">Not Allowed</div><div class="container">
   <!-- <div id="error">
     <h3>You are not LoggedIn</h3>
     <button routerLink="/login">Login</button>
@@ -8,23 +8,23 @@
       <h1 align="center"><span>I</span>ndex</h1>
     </div>
     <div class="sidebar">
-      <div class="title" *ngFor="let a of allData">
-        <div class="individual-title">
+      <div class="page" *ngFor="let a of noteData">
+        <div class="individual-page">
           <a
             class="note-name"
             routerLink="note"
-            (click)="onNoteClicked(a.title)"
-            >{{ a.title }}</a
+            (click)="onNoteClicked(a.page)"
+            >{{ a.page }}</a
           >
           <button
             style="margin-right: 10px"
             class="delete-button"
             routerLink="note"
-            (click)="onNoteClicked(a.title)"
+            (click)="onNoteClicked(a.page)"
           >
             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
           </button>
-          <button class="delete-button" (click)="deleteNote(a.title)">
+          <button class="delete-button" (click)="deleteNote(a.page)">
             <i class="fa fa-trash-o"></i>
           </button>
         </div>
@@ -43,18 +43,18 @@
       <div class="vertical-line" ></div>
       <div class="paneldetails">
       <!-- <div class="panelname"><p>Akshat Jain</p></div> -->
-      <div class="panel-userid"><p>@akshat1423</p></div>
+      <div class="panel-userid" id="useridpanel">@akshat1423</div>
       <div class="logout"><a class="logoutButton"  (click)="logout()">Logout</a></div></div>
     </div>
   </div>
   
   <form #textForm="ngForm" (ngSubmit)="editorSaveData(textForm.value)">
-    <div class="title">
+    <div class="page">
       <input
         id="necessary-text"
         placeholder="Note Heading"
         type="text"
-        name="title"
+        name="page"
         required
         ngModel
       />
@@ -63,7 +63,7 @@
       <textarea
         class="text-box1"
         placeholder="Share Something about today?"
-        name="mainNoteContent"
+        name="data"
         ngModel
       ></textarea>
     </div>
