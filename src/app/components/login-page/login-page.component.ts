@@ -7,31 +7,25 @@ import { config } from '../../config';
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.css'],
 })
-export class LoginPageComponent implements OnInit{
-
-
-
-  constructor(private http: HttpClient, private router: Router) { }
-
+export class LoginPageComponent implements OnInit {
+  constructor(private http: HttpClient, private router: Router) {}
 
   // data type fixed
-  
+
   userData: { userid: string; pswd: string; session_key?: string } = {
     userid: '',
     pswd: '',
     session_key: '',
   };
-  
 
   //initialiser
 
   ngOnInit() {
-    this.sharesession_key()
+    this.sharesession_key();
   }
 
-
   //sends login data to server to verify user
-  
+
   login() {
     var myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
@@ -41,48 +35,47 @@ export class LoginPageComponent implements OnInit{
       body: JSON.stringify(this.userData),
       redirect: 'follow',
     };
-    localStorage.setItem('userid',this.userData.userid)
-    fetch(config.url+'login/', requestParam)
-    .then((response) => response.text())
-    .then((result) => {
-      localStorage.setItem('session_key', result);
-      
-    })
-    .catch((error)=>{console.log(error)});
+    localStorage.setItem('userid', this.userData.userid);
+    fetch(config.url + 'login/', requestParam)
+      .then((response) => response.text())
+      .then((result) => {
+        localStorage.setItem('session_key', result);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     requestParam = {
       method: 'GET',
       redirect: 'follow',
     };
-    
+
     fetch(
-      'http://127.0.0.1:8000/checkLogin/?session_key=' +
-      localStorage.getItem('session_key'),
+      config.url +
+        'checkLogin/?session_key=' +
+        localStorage.getItem('session_key'),
       requestParam
-      )
-      .then((response) => 
-      response.text())
+    )
+      .then((response) => response.text())
       .then((result) => {
-        console.log(result);
-       setTimeout(() => {
-         if (result ==="True") {
-           this.router.navigate(['note']);
-         } else {
-          this.router.navigate(['login']);
-         }
-       }, 50);
+        setTimeout(() => {
+          if (result === 'True') {
+            this.router.navigate(['note']);
+            console.log('login successful');
+          } else {
+            this.router.navigate(['login']);
+            console.log('Cannot find user, create new user');
+          }
+        }, 50);
       })
-      .catch((error) => console.log('error', error));
-    
+      .catch(() => console.error(''));
   }
-  
 
   //disappearing login button
-    disappear() {
-      document.getElementById('disappear').style.visibility = 'hidden';
+  disappear() {
+    document.getElementById('disappear').style.visibility = 'hidden';
   }
 
-
-// shares session_key with registeruser page for auto login
+  // shares session_key with registeruser page for auto login
 
   sharesession_key() {
     var myHeaders = new Headers();
@@ -94,21 +87,26 @@ export class LoginPageComponent implements OnInit{
       redirect: 'follow',
     };
     fetch(
-      'http://127.0.0.1:8000/checkLogin/?session_key=' +
-      localStorage.getItem('session_key'),
+      config.url +
+        'checkLogin/?session_key=' +
+        localStorage.getItem('session_key'),
       requestParam
-      )
-      .then((response) => 
-      response.text())
+    )
+      .then((response) => response.text())
       .then((result) => {
-        console.log(result);
-        if (result ==="True") {
+        if (result === 'True') {
           this.router.navigate(['note']);
+          console.log('Session exist, auto login');
         } else {
+          console.log(
+            'You do not have any active login session, try login again or create new user'
+          );
         }
       })
-      .catch(() => console.log('You do not have any active login session, try login again or create new user'));
+      .catch((error) => {
+        console.log('error', error);
+        console.error('error connecting servers');
+      });
   }
 }
-export let userData
-
+export let userData;
