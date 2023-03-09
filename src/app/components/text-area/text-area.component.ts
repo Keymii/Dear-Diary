@@ -124,6 +124,7 @@ export class TextAreaComponent implements OnInit {
     setTimeout(() => {
       this.fetchData();
     }, 50);
+    this.newNote
   }
 
 
@@ -170,6 +171,7 @@ export class TextAreaComponent implements OnInit {
     setTimeout(() => {
       this.fetchData();
     }, 50);
+    this.newNote
   }
   deleteThisNote(page: string) {
     this.noteData.find((p) => {
@@ -199,6 +201,7 @@ export class TextAreaComponent implements OnInit {
     setTimeout(() => {
       this.fetchData();
     }, 50);
+    this.newNote
   }
 
 
@@ -218,5 +221,7 @@ export class TextAreaComponent implements OnInit {
       .catch((error) => console.log('error', error));
 
     this.router.navigate(['/login']);
+    this.newNote
+
   }
 }

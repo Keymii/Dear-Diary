@@ -61,11 +61,12 @@ export class RegisterUserComponent implements OnInit {
     fetch(config.url + 'register/?format=json', requestParam)
       .then((response) => response.text())
       .then((result) => {
-        console.log(result);
         if (result === 'True') {
           this.router.navigate(['login']);
+          console.log("Registration successful")
         } else {
           this.router.navigate(['register']);
+          console.log("user already exist")
         }
       })
       .catch(() => console.error('error connecting servers'));

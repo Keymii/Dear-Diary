@@ -49,25 +49,25 @@ export class LoginPageComponent implements OnInit {
       redirect: 'follow',
     };
 
-    fetch(
-      config.url +
-        'checkLogin/?session_key=' +
-        localStorage.getItem('session_key'),
-      requestParam
-    )
-      .then((response) => response.text())
-      .then((result) => {
-        setTimeout(() => {
-          if (result === 'True') {
-            this.router.navigate(['note']);
-            console.log('login successful');
-          } else {
-            this.router.navigate(['login']);
-            console.log('Cannot find user, create new user');
-          }
-        }, 50);
-      })
-      .catch(() => console.error(''));
+   setTimeout(() => {
+     fetch(
+       config.url +
+         'checkLogin/?session_key=' +
+         localStorage.getItem('session_key'),
+       requestParam
+     )
+       .then((response) => response.text())
+       .then((result) => {
+           if (result === 'True') {
+             this.router.navigate(['note']);
+             console.log('login successful');
+           } else {
+             this.router.navigate(['login']);
+             console.log('Cannot find user, create new user');
+           }
+         })
+       .catch(() => console.error(''));
+   }, 50);
   }
 
   //disappearing login button
