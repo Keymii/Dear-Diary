@@ -246,5 +246,17 @@ var requestOptions:RequestInit = {
   
 
   }
+
+  team(){
+    document.getElementById('appballoons').style.visibility = 'initial';
+    document.getElementById('teamdet').style.visibility = 'initial';
+    document.getElementById('approots').style.visibility = 'hidden';
+  }
+  close(){
+    document.getElementById('approots').style.visibility = 'initial';
+    document.getElementById('appballoons').style.visibility = 'hidden';
+    document.getElementById('teamdet').style.visibility = 'hidden';
+
+  }
 }
 

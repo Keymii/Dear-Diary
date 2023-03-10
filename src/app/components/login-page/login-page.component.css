@@ -406,3 +406,80 @@ body {
   #appballoons{
     visibility: hidden;
   }
+
+  #left {
+    border-top-left-radius: 250px;
+    background: lightgreen;
+    background: url(https://i.imgur.com/0kjMcUe.png);
+    padding: 50px;
+    filter: brightness(0.95) sepia(30%) saturate(80%);
+    /* border: 4px ridge; */
+    width: 40px;
+    /* filter: drop-shadow(5px 5px 25px black); */
+    height: 40px;
+    font-size: 25px;
+    position: fixed;
+    right: 0px;
+    bottom: -424px;
+    text-align: right;
+}
+
+.team{filter: drop-shadow(5px 5px 25px black);}
+  .o{
+    margin-left: 10px;
+  }
+  .t{
+    margin-left: -20px;
+    margin-top: -30px;
+  }
+  h2{
+    text-align: right;
+    margin-top: -15px;
+  text-align: right;
+  color: #8f6464;
+  text-shadow: 0.2px 0.2px 1.3px sienna;
+  }
+  
+  .teambody{
+    
+    font-size: 40px;
+    text-align: center;
+    line-height: 17px;
+ }
+
+ .x{
+  
+  margin-left: 95%;
+  margin-top: 2%;
+  font-size: 40px;
+  
+}
+#errormes{
+  visibility: hidden;
+  position: fixed;
+  left: 0;
+  height: 100%;
+  width: 0;
+  /* background-color: #0069ec; */
+  background: url("https://i.imgur.com/0kjMcUe.png");
+  transition: 0.3s;
+  opacity: 0.8;
+  filter: brightness(0.95) sepia(30%) saturate(80%);
+  width: 100vw;
+  
+}
+
+.errormessage1{
+  font-size:100px;
+  padding-left: 450px;
+  margin-top: 60px;
+}
+
+.deardiary{
+  transform: rotate(-90deg);
+  font-size: 130PX;
+  POSITION: FIXED;
+  LEFT: -90PX;
+  TOP: 339PX;
+  font-family: 'Sassy Frass', cursive;
+}

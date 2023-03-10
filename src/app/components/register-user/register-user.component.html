@@ -7,11 +7,23 @@
 </div> -->
 
 <div class="center">
+
+  <div id="errormes"> <div class="x"><a (click)="close()" >X</a></div><div class="deardiary">Dear Diary</div><div class="errormessage1">Team Details</div>
+  <p class="teambody" style="text-decoration: underline;">MENTOR: ABHIJAT BHARADWAJ </p>
+  <p class="teambody">AKSHAT JAIN (FRONT END: UI/UX API INTEGRATION LOGICS)</p>
+  <p class="teambody">AMAN MOON(FRONT END:API INTEGRATION LOGICS)</p>
+  <p class="teambody">TARUS PANDE(BACK END: API)</p>
+  <p class="teambody">AAROHAN HAZARIKAN(BACK END: API)</p>
+  <p class="teambody">MAHESH KUMAR(BACK END: API)</p></div>
+  
+<div class="container">
+  
   <input class="c-checkbox" type="checkbox" id="start">
   <input class="c-checkbox" type="checkbox" id="progress2">
   <input class="c-checkbox" type="checkbox" id="progress3">
   <input class="c-checkbox" type="checkbox" id="finish">
   <div class="c-form__progress" id ="progressbar"></div>
+  <p id ="welcome">Login using your Credentials</p>
   <div id="appballoons" >
     <app-balloons></app-balloons></div>
   <div class="someone" id ="someone">
@@ -22,6 +34,8 @@
   <div class="error" id="errormess">User Already Exists.</div>
   <div class="c-formContainer">
     <div class="c-welcome" id ="welcomemessage">Welcome aboard!</div>
+    
+    
     <form class="c-form" #formdata="ngForm" (ngSubmit)="newLoginData(formdata.value)" >
       <div class="c-form__group">
         <label class="c-form__label" for="username">
@@ -52,8 +66,7 @@
                           id="femail"
                           class="c-form__input"
                           placeholder=" "
-                          
-                          
+                          maxlength="20"
                           required
                           ngModel>
   
@@ -92,5 +105,7 @@
 
   </div>
   </div>
-
+  
+  
   <!-- pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" -->
+  <div class="team"><div id = "left"><a (click)="team()"><h2 class="o">Our</h2><h2 class="t">Team</h2></a></div></div>

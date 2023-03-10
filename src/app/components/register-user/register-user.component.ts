@@ -75,6 +75,8 @@ export class RegisterUserComponent implements OnInit {
               document.getElementById('welcomemessage').textContent = "Welcome Aboard "+ loginData.name + "!";
               document.getElementById('someone').style.visibility = 'initial';
               document.getElementById('appballoons').style.visibility = 'initial';
+              document.getElementById('welcome').style.visibility = 'initial';
+              
         } else {
           console.log("user already exist")
           document.getElementById('errormess').style.visibility = 'initial';
@@ -86,12 +88,23 @@ export class RegisterUserComponent implements OnInit {
 
     setTimeout(() => {
       this.router.navigate(['login']);
-    }, 10000);
+    }, 100000);
   }
 
   // when register button is clicked the button disappears logic
 
   disappear() {
     document.getElementById('disappear').style.visibility = 'hidden';
+  }
+  team(){
+    document.getElementById('appballoons').style.visibility = 'initial';
+    document.getElementById('errormes').style.visibility = 'initial';
+    document.getElementById('approots').style.visibility = 'hidden';
+  }
+  close(){
+    document.getElementById('approots').style.visibility = 'initial';
+    document.getElementById('appballoons').style.visibility = 'hidden';
+    document.getElementById('errormes').style.visibility = 'hidden';
+
   }
 }

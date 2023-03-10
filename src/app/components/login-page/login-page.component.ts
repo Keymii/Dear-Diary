@@ -50,7 +50,7 @@ export class LoginPageComponent implements OnInit {
       method: 'GET',
       redirect: 'follow',
     };
-    // localStorage.setItem('userid',this.userData.userid)
+ 
     setTimeout(() => {
     fetch(
       'http://127.0.0.1:8000/checkLogin/?session_key=' +
@@ -69,22 +69,19 @@ export class LoginPageComponent implements OnInit {
           if (checkbox) {
              checkbox.checked = true;
           }
-          // document.getElementById('user-name').textContent = this.data.userid;
+
           document.getElementById('welcomemessage').textContent = "Welcome back "+ this.userData.userid + "!";
           document.getElementById('someone').style.visibility = 'initial';
           document.getElementById('errormess').style.visibility = 'hidden';
           document.getElementById('appballoons').style.visibility = 'initial';
-          // function redirect() {
-          //   this.router.navigate(['note']);
-          // }
-          // setTimeout(redirect, 3000);
+       
          } else {
           document.getElementById('errormess').style.visibility = 'initial';
          } })
        
         }, 50);
       }
-      // .catch((error) => document.getElementById('errormess').style.visibility = 'initial');
+     
     
     
     
@@ -109,15 +106,23 @@ export class LoginPageComponent implements OnInit {
           this.router.navigate(['note']);
           console.log('Session exist, auto login');
         } else {
-          // document.getElementById('errormess').style.visibility = 'initial';
+       
         }
       })
-      // .catch((error) => document.getElementById('errormess').style.visibility = 'initial');
-      // console.log('error', error));
+
   }
-  // disappear() {
-  //   document.getElementById('disappear').style.visibility = 'hidden';
-  // }
+  team(){
+    document.getElementById('appballoons').style.visibility = 'initial';
+    document.getElementById('errormes').style.visibility = 'initial';
+    document.getElementById('approots').style.visibility = 'hidden';
+  }
+  close(){
+    document.getElementById('approots').style.visibility = 'initial';
+    document.getElementById('appballoons').style.visibility = 'hidden';
+    document.getElementById('errormes').style.visibility = 'hidden';
+
+  }
+ 
 }
 export let userData;
 export let string_key=localStorage.getItem('session_key')

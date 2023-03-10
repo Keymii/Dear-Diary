@@ -32,5 +32,5 @@ function changeBackground() {
     .catch(error => console.error(error));
 }
 
-changeBackground(); // Call the function once to set the initial background image
-setInterval(changeBackground, 6000); // Call the changeBackground function every 1 minute (60000 milliseconds)
+changeBackground(); 
+setInterval(changeBackground, 6000); 

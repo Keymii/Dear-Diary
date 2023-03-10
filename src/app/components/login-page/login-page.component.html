@@ -1,12 +1,13 @@
-<!-- <div class="container">
-    <form >
-        <input type="email" name="emailInput" id="emailInput" placeholder="Email">
-        <input type="password" name="passwordInput" id="passwordInput" placeholder="Password">
-        <input type="submit" name="login" id="login" >
-    </form>
-</div> -->
-
 <div class="center">
+
+  <div id="errormes"> <div class="x"><a (click)="close()" >X</a></div><div class="deardiary">Dear Diary</div><div class="errormessage1">Team Details</div>
+  <p class="teambody" style="text-decoration: underline;">MENTOR: ABHIJAT BHARADWAJ </p>
+  <p class="teambody">AKSHAT JAIN (FRONT END: UI/UX API INTEGRATION LOGICS)</p>
+  <p class="teambody">AMAN MOON(FRONT END:API INTEGRATION LOGICS)</p>
+  <p class="teambody">TARUS PANDE(BACK END: API)</p>
+  <p class="teambody">AAROHAN HAZARIKAN(BACK END: API)</p>
+  <p class="teambody">MAHESH KUMAR(BACK END: API)</p></div>
+
     <input class="c-checkbox" type="checkbox" id="start">
     <input class="c-checkbox" type="checkbox" id="progress2">
     <input class="c-checkbox" type="checkbox" id="progress3">
@@ -43,25 +44,6 @@
           </label>
         </div>
     
-        <!-- <div class="c-form__group">
-          <label class="c-form__label" for="femail">
-                        <input
-                            type="email"
-                            id="femail"
-                            class="c-form__input"
-                            placeholder=" "
-                            pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
-                            required>
-    
-                        <label class="c-form__next" for="progress3" role="button">
-                            <span class="c-form__nextIcon"></span>
-                        </label>
-    
-          <span class="c-form__groupLabel">What's your email?</span>
-          <b class="c-form__border"></b>
-          </label>
-        </div> -->
-    
         <div class="c-form__group">
           <label class="c-form__label" for="fpass">
             <input
@@ -74,10 +56,6 @@
             <button (click)="login()" type="submit" class="c-form__next" for="finish" role="button"id="ab">
               <span class="c-form__nextIcon"></span>
             </button>
-            <!-- <input
-            type="text"
-            name="session_key"
-                      required ngModel> -->
     
           <span class="c-form__groupLabel">Enter your password.</span>
           <b class="c-form__border"></b>
@@ -90,3 +68,5 @@
     </div>
     </div>
 
+
+    <div class="team"><div id = "left"><a (click)="team()"><h2 class="o">Our</h2><h2 class="t">Team</h2></a></div></div>

@@ -1,9 +1,17 @@
 <div id="errormes"><div class="errormessage1"><a routerLink="/login" style="cursor: pointer;">Please Login</a></div><p style="padding-left: 600px; font-size: 40px;">You ain't logged in.</p></div>
+<div id="teamdet"> <div class="x"><a (click)="close()" >X</a></div>
+<div class="deardiary">Dear Diary</div>
+<div class="errormessage1">Team Details</div>
+<p class="teambody" style="text-decoration: underline;">MENTOR: ABHIJAT BHARADWAJ </p>
+<p class="teambody">AKSHAT JAIN (FRONT END: UI/UX API INTEGRATION LOGICS)</p>
+<p class="teambody">AMAN MOON(FRONT END:API INTEGRATION LOGICS)</p>
+<p class="teambody">TARUS PANDE(BACK END: API)</p>
+<p class="teambody">AAROHAN HAZARIKAN(BACK END: API)</p>
+<p class="teambody">MAHESH KUMAR(BACK END: API)</p></div>
+<div id="appballoons" >
+  <app-balloons></app-balloons>
+</div>
 <div class="container">
-  <!-- <div id="error">
-    <h3>You are not LoggedIn</h3>
-    <button routerLink="/login">Login</button>
-  </div> -->
   <div class="side-nav" id="sidenav">
     <div class="headnav">
       <h1 align="center"><span>I</span>ndex</h1>
@@ -11,9 +19,9 @@
     <div class="sidebar">
       <div class="page" *ngFor="let a of noteData">
         <div class="individual-page">
+          <div class="styling">
           <a
             class="note-name"
-            routerLink="note"
             (click)="onNoteClicked(a.page)"
             >{{ a.page }}</a
           >
@@ -27,7 +35,8 @@
           </button>
           <button class="delete-button" (click)="deleteNote(a.page)">
             <i class="fa fa-trash-o"></i>
-          </button>
+          </button></div>
+          <hr width="100%" />
         </div>
       </div>
       
@@ -88,3 +97,4 @@
 
 
 </div>
+<div class="team"><div id = "left"><a (click)="team()"><h2 class="o">Our</h2><h2 class="t">Team</h2></a></div></div>
